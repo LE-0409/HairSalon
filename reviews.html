@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>후기 — Salon Rausch</title>
+<link rel="stylesheet" href="assets/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">R</span> Salon&nbsp;Rausch</a>
+    <nav class="topnav__links">
+      <a href="designers.html">디자이너</a>
+      <a href="reviews.html" class="is-active">후기</a>
+      <a href="booking.html">예약하기</a>
+    </nav>
+    <div class="topnav__cta">
+      <a href="admin.html" class="btn btn--ghost btn--pill">관리자</a>
+      <a href="booking.html" class="btn btn--primary btn--pill">예약하기</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container">
+
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">REVIEWS · 1,284</span>
+          <h1 style="font-size:36px; font-weight:600; letter-spacing:-0.8px; margin-top:8px;">
+            먼저 다녀가신 분들의 진짜 후기
+          </h1>
+          <p class="muted" style="margin-top:8px;">디자이너별로 후기를 확인해보세요. 별점은 카카오톡 인증 고객만 작성합니다.</p>
+        </div>
+      </div>
+
+      <!-- Designer category tabs -->
+      <div class="cat-tabs">
+        <button class="cat-tab is-active" data-filter="all">전체 1,284</button>
+        <button class="cat-tab" data-filter="dahyun">김다현 342</button>
+        <button class="cat-tab" data-filter="sooa">박수아 281</button>
+        <button class="cat-tab" data-filter="minji">이민지 197</button>
+        <button class="cat-tab" data-filter="hyunwoo">정현우 134</button>
+        <button class="cat-tab" data-filter="suyoung">유서영 121</button>
+        <button class="cat-tab" data-filter="taeri">한태리 98</button>
+        <button class="cat-tab" data-filter="seoyoon">최서윤 86</button>
+        <button class="cat-tab" data-filter="junho">강준호 75</button>
+      </div>
+
+      <!-- review grid -->
+      <div class="grid-cards grid-cards--3">
+
+        <article class="review-card" data-review-designer="dahyun">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="cocoa"></div>
+            <div class="review-card__photo" data-tone="rose"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 5.0</div>
+            <div class="review-card__title">발레아쥬가 너무 자연스러워요</div>
+            <p class="review-card__excerpt">톤다운 베이스에 자연스러운 하이라이트를 넣어주셨는데 햇빛 받으면 색이 살아나요.</p>
+            <div class="review-card__foot"><span>김다현 · 발레아쥬</span><span>3일 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="sooa">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="charcoal"></div>
+            <div class="review-card__photo" data-tone="warm"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 4.9</div>
+            <div class="review-card__title">남자 다운펌 진짜 잘하세요</div>
+            <p class="review-card__excerpt">결대로 정직하게 잡아주셔서 자고 일어나도 망가지지 않아요. 한 달째 유지 중입니다.</p>
+            <div class="review-card__foot"><span>박수아 · 다운펌</span><span>1주 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="minji">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="cream"></div>
+            <div class="review-card__photo" data-tone="lilac"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 5.0</div>
+            <div class="review-card__title">베이비펌 결이 진짜 살아있어요</div>
+            <p class="review-card__excerpt">손상 거의 없이 자연스러운 웨이브 만들어주세요. 첫 펌인데 만족스럽고 친절하셨어요.</p>
+            <div class="review-card__foot"><span>이민지 · 베이비펌</span><span>2주 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="hyunwoo">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="charcoal"></div>
+            <div class="review-card__photo" data-tone="lilac"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 4.8</div>
+            <div class="review-card__title">애쉬 컬러 톤 진짜 잘 빠짐</div>
+            <p class="review-card__excerpt">사진 보여드리니 바로 톤 잡아주셨어요. 노란기 없이 깔끔하게 나왔습니다.</p>
+            <div class="review-card__foot"><span>정현우 · 애쉬 컬러</span><span>3주 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="dahyun">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="forest"></div>
+            <div class="review-card__photo" data-tone="cream"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 5.0</div>
+            <div class="review-card__title">시그니처 컷 — 인생 미용실</div>
+            <p class="review-card__excerpt">두상 단점 다 잡아주시고 손질도 정말 쉬워졌어요. 1시간 단위라 천천히 봐주셔서 좋았어요.</p>
+            <div class="review-card__foot"><span>김다현 · 시그니처 컷</span><span>4주 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="suyoung">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="warm"></div>
+            <div class="review-card__photo" data-tone="ocean"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 4.9</div>
+            <div class="review-card__title">레이어드 컷 추천드려요</div>
+            <p class="review-card__excerpt">단발 자르려다 길이 살리고 레이어로 가벼움 만들어주셨어요. 결과 만족!</p>
+            <div class="review-card__foot"><span>유서영 · 레이어드 컷</span><span>1개월 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="taeri">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="cocoa"></div>
+            <div class="review-card__photo" data-tone="rose"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 4.8</div>
+            <div class="review-card__title">옴브레가 자연스럽게 빠짐</div>
+            <p class="review-card__excerpt">탈색 자국 거의 없이 그라데이션 만들어주셨어요. 머릿결도 케어 잘 해주셨습니다.</p>
+            <div class="review-card__foot"><span>한태리 · 옴브레</span><span>1개월 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="seoyoon">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="lilac"></div>
+            <div class="review-card__photo" data-tone="forest"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 4.9</div>
+            <div class="review-card__title">베이비펌 너무 마음에 들어요</div>
+            <p class="review-card__excerpt">생머리에 자연스러운 C컬 부탁드렸는데 딱 사진처럼! 손질 1분 컷.</p>
+            <div class="review-card__foot"><span>최서윤 · 베이비펌</span><span>1개월 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="junho">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="charcoal"></div>
+            <div class="review-card__photo" data-tone="cream"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 4.7</div>
+            <div class="review-card__title">댄디컷 깔끔하게 잘 잡아주세요</div>
+            <p class="review-card__excerpt">투블럭이 너무 강해보일까 걱정했는데 부드럽게 다듬어주셔서 좋았어요.</p>
+            <div class="review-card__foot"><span>강준호 · 댄디컷</span><span>2개월 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="sooa">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="ocean"></div>
+            <div class="review-card__photo" data-tone="cocoa"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 5.0</div>
+            <div class="review-card__title">남자 시술 전문이세요</div>
+            <p class="review-card__excerpt">머리 잘 자르는 곳은 많은데 다운펌으로 결까지 잡아주는 곳은 여기뿐.</p>
+            <div class="review-card__foot"><span>박수아 · 남자컷</span><span>2개월 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="dahyun">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="warm"></div>
+            <div class="review-card__photo" data-tone="forest"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 5.0</div>
+            <div class="review-card__title">대표님 손맛 진심 다름</div>
+            <p class="review-card__excerpt">시술 1시간 내내 계속 확인해주시면서 진행. 디테일 차이가 확실히 보여요.</p>
+            <div class="review-card__foot"><span>김다현 · 시그니처 컷</span><span>2개월 전</span></div>
+          </div>
+        </article>
+
+        <article class="review-card" data-review-designer="minji">
+          <div class="review-card__photos">
+            <div class="review-card__photo" data-tone="rose"></div>
+            <div class="review-card__photo" data-tone="cream"></div>
+          </div>
+          <div class="review-card__body">
+            <div class="review-card__rating">★ 4.9</div>
+            <div class="review-card__title">시스루뱅 너무 자연스러워요</div>
+            <p class="review-card__excerpt">얼굴형 보고 길이 조절 디테일하게 해주셔서 한 달 지나도 예쁘게 자라요.</p>
+            <div class="review-card__foot"><span>이민지 · 시스루</span><span>3개월 전</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__cols">
+      <div><h4>예약 & 문의</h4><ul><li>예약하기</li><li>예약 변경 / 취소</li><li>카카오톡 상담</li></ul></div>
+      <div><h4>살롱 소개</h4><ul><li>디자이너</li><li>시술 메뉴 & 가격</li><li>후기</li></ul></div>
+      <div><h4>Salon Rausch</h4><ul><li>인스타그램</li><li>네이버 플레이스</li><li>커뮤니티</li></ul></div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 Salon Rausch</span>
+      <span>한국어 (KR) · KRW</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

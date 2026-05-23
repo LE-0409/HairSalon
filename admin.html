@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>관리자 — Salon Rausch</title>
+<link rel="stylesheet" href="assets/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">R</span> Salon&nbsp;Rausch</a>
+    <nav class="topnav__links">
+      <a href="designers.html">디자이너</a>
+      <a href="reviews.html">후기</a>
+      <a href="booking.html">예약하기</a>
+    </nav>
+    <div class="topnav__cta">
+      <span class="tag tag--ink">ADMIN</span>
+      <a href="index.html" class="btn btn--ghost btn--pill">사이트로 가기</a>
+    </div>
+  </div>
+</header>
+
+<div class="admin-shell">
+
+  <!-- Sidebar -->
+  <aside class="admin-side">
+    <div class="admin-side__title">대시보드</div>
+    <a href="#bookings" class="is-active">예약 목록</a>
+
+    <div class="admin-side__title">콘텐츠</div>
+    <a href="#services">시술 메뉴</a>
+    <a href="#designers">디자이너 관리</a>
+    <a href="#matrix">디자이너-시술 매핑</a>
+
+    <div class="admin-side__title">계정</div>
+    <a href="#account">관리자 계정</a>
+    <a href="index.html">로그아웃</a>
+  </aside>
+
+  <!-- Main -->
+  <main class="admin-main">
+
+    <!-- ========== Bookings ========== -->
+    <section id="bookings">
+      <h1>예약 목록</h1>
+      <p class="lede">카카오톡으로 예약한 고객 명단입니다. 카카오 ID와 핸드폰 번호는 매장에서만 확인됩니다.</p>
+
+      <div style="display:flex; gap:8px; margin-bottom: 16px; flex-wrap: wrap;">
+        <button class="btn btn--pill" style="background: var(--color-ink); color:#fff;">전체 28</button>
+        <button class="btn btn--pill btn--secondary" style="height:auto; padding: 8px 16px;">오늘 4</button>
+        <button class="btn btn--pill btn--secondary" style="height:auto; padding: 8px 16px;">이번 주 12</button>
+        <button class="btn btn--pill btn--secondary" style="height:auto; padding: 8px 16px;">리마인더 대기 2</button>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>예약 일시</th>
+            <th>디자이너</th>
+            <th>시술</th>
+            <th>카카오 ID</th>
+            <th>핸드폰</th>
+            <th>금액</th>
+            <th>상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>6/12 (금) 14:00</td>
+            <td>김다현</td>
+            <td>시그니처 컷</td>
+            <td>eunsu_dev</td>
+            <td>010-2345-0409</td>
+            <td>₩ 80,000</td>
+            <td><span class="status-chip status-chip--confirmed">확정</span></td>
+          </tr>
+          <tr>
+            <td>6/12 (금) 16:00</td>
+            <td>박수아</td>
+            <td>다운펌</td>
+            <td>jiwoo01</td>
+            <td>010-7788-1234</td>
+            <td>₩ 95,000</td>
+            <td><span class="status-chip status-chip--confirmed">확정</span></td>
+          </tr>
+          <tr>
+            <td>6/13 (토) 11:00</td>
+            <td>김다현</td>
+            <td>발레아쥬</td>
+            <td>minji.kim</td>
+            <td>010-4452-9001</td>
+            <td>₩ 220,000</td>
+            <td><span class="status-chip status-chip--reminded">리마인더 발송됨</span></td>
+          </tr>
+          <tr>
+            <td>6/13 (토) 14:30</td>
+            <td>이민지</td>
+            <td>베이비펌</td>
+            <td>haseul.k</td>
+            <td>010-9988-2210</td>
+            <td>₩ 110,000</td>
+            <td><span class="status-chip status-chip--confirmed">확정</span></td>
+          </tr>
+          <tr>
+            <td>6/10 (수) 19:00</td>
+            <td>정현우</td>
+            <td>애쉬 컬러</td>
+            <td>changmin</td>
+            <td>010-3333-4567</td>
+            <td>₩ 180,000</td>
+            <td><span class="status-chip status-chip--done">완료</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ========== Services ========== -->
+    <section id="services" style="margin-top: 64px;">
+      <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom: 16px;">
+        <div>
+          <h1>시술 메뉴</h1>
+          <p class="lede">매장 시술 가격과 설명을 관리합니다. 시드 메뉴로 커트·펌·염색·클리닉이 기본 제공됩니다.</p>
+        </div>
+        <button class="btn btn--primary">+ 시술 추가</button>
+      </div>
+
+      <div class="grid-cards grid-cards--3">
+
+        <article class="review-card">
+          <div class="review-card__photo" data-tone="rose" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">시그니처 컷</h4>
+              <strong>₩ 80,000</strong>
+            </div>
+            <p class="review-card__excerpt">두상·머릿결·라이프스타일 1:1 진단 후 시술. (60분)</p>
+            <div class="review-card__foot">
+              <span>가능 디자이너 6명</span>
+              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__photo" data-tone="warm" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">발레아쥬 (염색)</h4>
+              <strong>₩ 220,000</strong>
+            </div>
+            <p class="review-card__excerpt">자연스러운 그라데이션, 햇빛에 색이 살아남. (180분)</p>
+            <div class="review-card__foot">
+              <span>가능 디자이너 3명</span>
+              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__photo" data-tone="cocoa" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">남자 다운펌</h4>
+              <strong>₩ 95,000</strong>
+            </div>
+            <p class="review-card__excerpt">자고 일어나도 망가지지 않는 자연스런 결. (90분)</p>
+            <div class="review-card__foot">
+              <span>가능 디자이너 4명</span>
+              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__photo" data-tone="lilac" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">베이비펌</h4>
+              <strong>₩ 110,000</strong>
+            </div>
+            <p class="review-card__excerpt">자연스러운 C컬, 손상 최소화 처방. (120분)</p>
+            <div class="review-card__foot">
+              <span>가능 디자이너 5명</span>
+              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__photo" data-tone="forest" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">두피 클리닉</h4>
+              <strong>₩ 85,000</strong>
+            </div>
+            <p class="review-card__excerpt">두피 진단 후 맞춤 케어. 시술과 함께 권장. (40분)</p>
+            <div class="review-card__foot">
+              <span>가능 디자이너 12명 (전체)</span>
+              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div class="review-card__photo" data-tone="ocean" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">애쉬 컬러</h4>
+              <strong>₩ 180,000</strong>
+            </div>
+            <p class="review-card__excerpt">노란기 없는 깔끔한 회갈색 톤. (150분)</p>
+            <div class="review-card__foot">
+              <span>가능 디자이너 2명</span>
+              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== Matrix ========== -->
+    <section id="matrix" style="margin-top: 64px;">
+      <h1>디자이너 × 시술 매핑</h1>
+      <p class="lede">체크된 시술만 예약하기 페이지에서 해당 디자이너에게 노출됩니다.</p>
+
+      <table class="matrix-table" style="margin-top: 16px;">
+        <thead>
+          <tr>
+            <th style="width: 200px;">디자이너 \ 시술</th>
+            <th>시그니처 컷</th>
+            <th>발레아쥬</th>
+            <th>다운펌</th>
+            <th>베이비펌</th>
+            <th>두피 클리닉</th>
+            <th>애쉬 컬러</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>김다현</strong><div class="muted" style="font-size: var(--fs-caption-sm);">대표 · 16년차</div></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td><strong>박수아</strong><div class="muted" style="font-size: var(--fs-caption-sm);">부원장 · 11년차</div></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td><strong>이민지</strong><div class="muted" style="font-size: var(--fs-caption-sm);">실장 · 8년차</div></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td><strong>정현우</strong><div class="muted" style="font-size: var(--fs-caption-sm);">디자이너 · 6년차</div></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" checked /></td>
+          </tr>
+          <tr>
+            <td><strong>유서영</strong><div class="muted" style="font-size: var(--fs-caption-sm);">실장 · 9년차</div></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+          <tr>
+            <td><strong>한태리</strong><div class="muted" style="font-size: var(--fs-caption-sm);">디자이너 · 5년차</div></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" checked /></td>
+            <td><input type="checkbox" /></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 16px; display:flex; gap:12px;">
+        <button class="btn btn--primary">저장</button>
+        <button class="btn btn--secondary">초기화</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

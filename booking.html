@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>예약하기 — Salon Rausch</title>
+<link rel="stylesheet" href="assets/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav__inner">
+    <a href="index.html" class="brand"><span class="brand__mark">R</span> Salon&nbsp;Rausch</a>
+    <nav class="topnav__links">
+      <a href="designers.html">디자이너</a>
+      <a href="reviews.html">후기</a>
+      <a href="booking.html" class="is-active">예약하기</a>
+    </nav>
+    <div class="topnav__cta">
+      <a href="admin.html" class="btn btn--ghost btn--pill">관리자</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="container container--narrow" style="padding-top: 32px;">
+    <div class="sec-head" style="margin-bottom: 16px;">
+      <div>
+        <span class="eyebrow">RESERVATION · 5 STEPS</span>
+        <h1 style="font-size:32px; font-weight:600; letter-spacing:-0.8px; margin-top:8px;">예약하기</h1>
+      </div>
+    </div>
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <span class="stepper__item is-done"><span class="stepper__num">1</span>카카오 로그인</span>
+      <span class="stepper__item is-active"><span class="stepper__num">2</span>디자이너 선택</span>
+      <span class="stepper__item is-active"><span class="stepper__num">3</span>시술 선택</span>
+      <span class="stepper__item is-active"><span class="stepper__num">4</span>날짜·시간</span>
+      <span class="stepper__item"><span class="stepper__num">5</span>확인 & 예약</span>
+    </div>
+
+    <div class="booking-layout">
+
+      <div>
+        <!-- Step 1: Kakao login -->
+        <section class="book-step">
+          <h2>1. 카카오톡으로 로그인</h2>
+          <p class="lede">예약 확인 메시지와 하루 전 리마인더를 카카오톡으로 보내드려요.</p>
+
+          <div class="kakao-card">
+            <div class="kakao-icon">K</div>
+            <div>
+              <strong style="font-size: var(--fs-title);">eunsu_dev</strong>
+              <div class="muted" style="font-size: var(--fs-body-sm);">010-****-0409 · 카카오 인증 완료</div>
+            </div>
+            <button class="btn btn--secondary">변경</button>
+          </div>
+        </section>
+
+        <!-- Step 2: Designer -->
+        <section class="book-step">
+          <h2>2. 디자이너를 선택해주세요</h2>
+          <p class="lede">디자이너별로 가능한 시술이 달라요.</p>
+
+          <div class="pick-row">
+            <div class="pick-card is-selected" data-pick data-pick-group="designer" data-label="김다현 (대표·16년차)">
+              <div class="pick-card__photo" data-tone="rose" style="background: linear-gradient(135deg,#ffd9e1,#ff8aa3);">
+                <span class="designer-card__initial">다</span>
+              </div>
+              <h4>김다현</h4>
+              <p>대표 · 16년차</p>
+            </div>
+            <div class="pick-card" data-pick data-pick-group="designer" data-label="박수아 (부원장·11년차)">
+              <div class="pick-card__photo" style="background: linear-gradient(135deg,#fde2c7,#f3a261);">
+                <span class="designer-card__initial">수</span>
+              </div>
+              <h4>박수아</h4>
+              <p>부원장 · 11년차</p>
+            </div>
+            <div class="pick-card" data-pick data-pick-group="designer" data-label="이민지 (실장·8년차)">
+              <div class="pick-card__photo" style="background: linear-gradient(135deg,#e8d3bf,#a07259);">
+                <span class="designer-card__initial">민</span>
+              </div>
+              <h4>이민지</h4>
+              <p>실장 · 8년차</p>
+            </div>
+            <div class="pick-card" data-pick data-pick-group="designer" data-label="정현우 (디자이너·6년차)">
+              <div class="pick-card__photo" style="background: linear-gradient(135deg,#e6dcef,#a991bb);">
+                <span class="designer-card__initial">현</span>
+              </div>
+              <h4>정현우</h4>
+              <p>디자이너 · 6년차</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 3: Service -->
+        <section class="book-step">
+          <h2>3. 시술을 선택해주세요</h2>
+          <p class="lede">
+            <strong>김다현 대표</strong>가 가능한 시술만 보여드려요.
+          </p>
+
+          <div class="service-row is-selected" data-pick data-pick-group="service" data-label="시그니처 컷" data-price="₩ 80,000">
+            <div class="service-row__photo" style="background: linear-gradient(135deg,#ffd9e1,#ff8aa3);"></div>
+            <div class="service-row__main">
+              <div class="service-row__title">
+                <span>시그니처 컷</span>
+                <span class="service-row__price">₩ 80,000</span>
+              </div>
+              <div class="service-row__desc">두상·머릿결·라이프스타일을 1:1로 진단하고 김다현 대표가 직접 컷합니다.</div>
+              <div class="service-row__time">⏱ 약 60분</div>
+            </div>
+          </div>
+
+          <div class="service-row" data-pick data-pick-group="service" data-label="발레아쥬 (염색)" data-price="₩ 220,000">
+            <div class="service-row__photo" style="background: linear-gradient(135deg,#fde2c7,#f3a261);"></div>
+            <div class="service-row__main">
+              <div class="service-row__title">
+                <span>발레아쥬 (염색)</span>
+                <span class="service-row__price">₩ 220,000</span>
+              </div>
+              <div class="service-row__desc">자연스러운 그라데이션. 햇빛에 색이 살아나는 시그니처 컬러.</div>
+              <div class="service-row__time">⏱ 약 180분</div>
+            </div>
+          </div>
+
+          <div class="service-row" data-pick data-pick-group="service" data-label="레이어드 컷" data-price="₩ 65,000">
+            <div class="service-row__photo" style="background: linear-gradient(135deg,#e6dcef,#a991bb);"></div>
+            <div class="service-row__main">
+              <div class="service-row__title">
+                <span>레이어드 컷</span>
+                <span class="service-row__price">₩ 65,000</span>
+              </div>
+              <div class="service-row__desc">긴 머리 가볍게, 짧은 머리에 입체감을. 결대로 정리합니다.</div>
+              <div class="service-row__time">⏱ 약 45분</div>
+            </div>
+          </div>
+
+          <div class="service-row" data-pick data-pick-group="service" data-label="두피 클리닉" data-price="₩ 85,000">
+            <div class="service-row__photo" style="background: linear-gradient(135deg,#dde9d9,#7a9874);"></div>
+            <div class="service-row__main">
+              <div class="service-row__title">
+                <span>두피 클리닉</span>
+                <span class="service-row__price">₩ 85,000</span>
+              </div>
+              <div class="service-row__desc">두피 진단 후 맞춤 케어. 시술과 함께 받으시면 더 효과적이에요.</div>
+              <div class="service-row__time">⏱ 약 40분</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 4: Date & Time -->
+        <section class="book-step">
+          <h2>4. 날짜와 시간을 골라주세요</h2>
+          <p class="lede">디자이너의 가능한 일정만 표시됩니다.</p>
+
+          <h3 class="h-display-md" style="margin: 12px 0 12px; font-size: var(--fs-display-sm); font-weight:600;">2026년 6월</h3>
+          <div class="calendar">
+            <div class="calendar__head">일</div>
+            <div class="calendar__head">월</div>
+            <div class="calendar__head">화</div>
+            <div class="calendar__head">수</div>
+            <div class="calendar__head">목</div>
+            <div class="calendar__head">금</div>
+            <div class="calendar__head">토</div>
+
+            <div class="calendar__day is-muted"></div>
+            <div class="calendar__day is-disabled">1</div>
+            <div class="calendar__day">2</div>
+            <div class="calendar__day">3</div>
+            <div class="calendar__day">4</div>
+            <div class="calendar__day">5</div>
+            <div class="calendar__day">6</div>
+
+            <div class="calendar__day">7</div>
+            <div class="calendar__day is-disabled">8</div>
+            <div class="calendar__day">9</div>
+            <div class="calendar__day">10</div>
+            <div class="calendar__day">11</div>
+            <div class="calendar__day is-selected" data-label="6월 12일 (금)">12</div>
+            <div class="calendar__day">13</div>
+
+            <div class="calendar__day">14</div>
+            <div class="calendar__day is-disabled">15</div>
+            <div class="calendar__day">16</div>
+            <div class="calendar__day">17</div>
+            <div class="calendar__day">18</div>
+            <div class="calendar__day">19</div>
+            <div class="calendar__day">20</div>
+
+            <div class="calendar__day">21</div>
+            <div class="calendar__day is-disabled">22</div>
+            <div class="calendar__day">23</div>
+            <div class="calendar__day">24</div>
+            <div class="calendar__day">25</div>
+            <div class="calendar__day">26</div>
+            <div class="calendar__day">27</div>
+
+            <div class="calendar__day">28</div>
+            <div class="calendar__day is-disabled">29</div>
+            <div class="calendar__day">30</div>
+            <div class="calendar__day is-muted"></div>
+            <div class="calendar__day is-muted"></div>
+            <div class="calendar__day is-muted"></div>
+            <div class="calendar__day is-muted"></div>
+          </div>
+
+          <h4 style="font-size: var(--fs-title); font-weight:600; margin: 8px 0 12px;">시간 선택</h4>
+          <div class="time-slots">
+            <div class="time-slot">11:00</div>
+            <div class="time-slot is-disabled">12:00</div>
+            <div class="time-slot">13:00</div>
+            <div class="time-slot is-selected">14:00</div>
+            <div class="time-slot">15:00</div>
+            <div class="time-slot is-disabled">16:00</div>
+            <div class="time-slot">17:00</div>
+            <div class="time-slot">18:00</div>
+            <div class="time-slot">19:00</div>
+            <div class="time-slot is-disabled">20:00</div>
+          </div>
+        </section>
+
+        <!-- Step 5: Confirm -->
+        <section class="book-step">
+          <h2>5. 마지막으로 확인해주세요</h2>
+          <p class="lede">요청사항이 있다면 디자이너에게 미리 전달해드려요.</p>
+
+          <label class="field">
+            <span class="field__label">요청사항 (선택)</span>
+            <textarea placeholder="예) 사진처럼 잘라주세요 / 두피 민감해요 등 자유롭게 적어주세요."></textarea>
+          </label>
+
+          <label class="field">
+            <span class="field__label">연락처 (카카오에서 자동 채워짐)</span>
+            <input type="tel" value="010-****-0409" />
+          </label>
+
+          <div style="margin-top: 24px; display:flex; gap:12px; flex-wrap: wrap;">
+            <button class="btn btn--primary btn--lg">예약 확정하기</button>
+            <button class="btn btn--ghost btn--lg">취소</button>
+          </div>
+
+          <p class="muted" style="font-size: var(--fs-body-sm); margin-top: 16px;">
+            예약 확정과 함께 카카오톡으로 확인 메시지를 보내드려요. 예약 1일 전에는 리마인더 메시지가 전송됩니다.
+          </p>
+        </section>
+      </div>
+
+      <!-- Sticky summary -->
+      <aside class="summary-card">
+        <h3>예약 요약</h3>
+        <dl>
+          <div class="summary-row"><dt>디자이너</dt><dd data-summary="designer">김다현 (대표·16년차)</dd></div>
+          <div class="summary-row"><dt>시술</dt><dd data-summary="service">시그니처 컷</dd></div>
+          <div class="summary-row"><dt>날짜</dt><dd data-summary="date">6월 12일 (금)</dd></div>
+          <div class="summary-row"><dt>시간</dt><dd data-summary="time">14:00</dd></div>
+          <div class="summary-row"><dt>예상 소요</dt><dd>약 60분</dd></div>
+        </dl>
+        <div class="summary-total">
+          <span>합계</span>
+          <span data-summary="price">₩ 80,000</span>
+        </div>
+        <button class="btn btn--primary btn--block" style="margin-top: 16px;">예약 확정하기</button>
+        <p class="muted" style="font-size: var(--fs-caption-sm); margin-top: 12px; text-align: center;">
+          결제는 매장에서 진행됩니다.
+        </p>
+      </aside>
+
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__cols">
+      <div><h4>예약 & 문의</h4><ul><li>예약하기</li><li>예약 변경 / 취소</li><li>카카오톡 상담</li></ul></div>
+      <div><h4>살롱 소개</h4><ul><li>디자이너</li><li>시술 메뉴 & 가격</li><li>후기</li></ul></div>
+      <div><h4>Salon Rausch</h4><ul><li>인스타그램</li><li>네이버 플레이스</li><li>커뮤니티</li></ul></div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 Salon Rausch</span>
+      <span>한국어 (KR) · KRW</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
