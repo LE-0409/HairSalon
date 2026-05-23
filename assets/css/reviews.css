@@ -10,10 +10,7 @@
   margin-top: 8px;
 }
 
-@media (max-width: 720px) {
-  .reviews-head h1 { font-size: 26px; }
-}
-
-@media (max-width: 480px) {
-  .reviews-head h1 { font-size: 22px; }
+/* DESIGN.md §Responsive: editorial bands compress on mobile (<744px) */
+@media (max-width: 743px) {
+  .reviews-head h1 { font-size: 24px; }
 }

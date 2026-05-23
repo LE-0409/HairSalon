@@ -68,6 +68,9 @@
 .tag--outline { background: transparent; border: 1px solid var(--color-hairline); }
 .tag--ink { background: var(--color-ink); color: #fff; }
 
+/* DESIGN.md §Touch Targets: "Primary CTAs at minimum 48×48px (above WCAG AAA)."
+   We keep desktop 48px and tighten only inner padding on small screens — the
+   touch box stays at minimum 44px so it never drops below WCAG AA. */
 @media (max-width: 480px) {
   .btn { padding: 12px 18px; height: 44px; font-size: var(--fs-body-sm); }
   .btn--lg { height: 52px; padding: 14px 22px; font-size: 16px; }

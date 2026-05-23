@@ -82,13 +82,15 @@
   font-size: var(--fs-body-sm);
   color: var(--color-muted);
 }
+/* DESIGN.md §Touch Targets + §components.search-orb: 48×48 px circular,
+   Rausch fill — "the most-tapped element on the page". Spec is exact. */
 .searchpill__orb {
   background: var(--color-primary);
   color: #fff;
-  width: 56px; height: 56px;
+  width: 48px; height: 48px;
   border-radius: var(--r-full);
   display: grid; place-items: center;
-  margin-right: 6px;
+  margin-right: 10px;
 }
 .searchpill__orb:hover { background: var(--color-primary-active); }
 
@@ -118,14 +120,22 @@
   background: linear-gradient(135deg, #f9f4e9, #dccfa9);
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 880px) {
+/* ---------- Responsive (per DESIGN.md §Responsive Behavior) ----------
+   Tablet 744–1128px: hero compresses; search bar narrows but stays 3-up.
+   Mobile <744px:    hero stacks; "Search bar's 3 segments collapse into
+                     a single-tap entry that opens a full-screen overlay". */
+@media (max-width: 1127px) {
+  .hero__grid { gap: 32px; }
+  .searchpill { max-width: 720px; }
+}
+
+@media (max-width: 743px) {
   .hero { padding: 32px 0 40px; }
   .hero__grid { grid-template-columns: 1fr; gap: 28px; }
   .hero__photo { aspect-ratio: 4 / 3; }
   .hero__photo-label { bottom: 12px; left: 12px; }
 
-  /* Search pill collapses to a single tap */
+  /* DESIGN.md: 3 segments collapse to a single tap on mobile */
   .searchpill {
     grid-template-columns: 1fr auto;
     height: auto;
@@ -136,13 +146,10 @@
     border-right: none;
   }
   .searchpill__seg:not(:first-of-type) { display: none; }
-  .searchpill__orb { width: 48px; height: 48px; }
 
   .about-grid { grid-template-columns: 1fr; gap: 24px; }
   .about-grid h2 { font-size: 26px; }
   .about-grid__photo { aspect-ratio: 4 / 3; }
-}
 
-@media (max-width: 480px) {
   .hero__copy p { font-size: 15px; }
 }

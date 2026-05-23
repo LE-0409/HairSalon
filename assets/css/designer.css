@@ -91,7 +91,13 @@
   font-weight: 700; font-size: 24px;
 }
 
-@media (max-width: 880px) {
+/* DESIGN.md §Responsive: listing-detail style page collapses
+   2-column to 1-column on mobile (<744px). */
+@media (max-width: 1127px) {
+  .detail-hero { grid-template-columns: 280px 1fr; gap: 32px; }
+}
+
+@media (max-width: 743px) {
   .detail-hero { grid-template-columns: 1fr; gap: 24px; margin: 20px 0 32px; }
   .detail-hero__photo { max-width: 280px; }
   .detail-hero h1 { font-size: 30px; }
@@ -109,9 +115,7 @@
     grid-column: 1 / -1;
     width: 100%;
   }
-}
 
-@media (max-width: 480px) {
   .detail-hero__stats { gap: 20px; }
   .stat-block strong { font-size: 20px; }
 }

@@ -82,8 +82,19 @@
     rgba(0, 0, 0, 0.04) 0 2px 6px 0,
     rgba(0, 0, 0, 0.1) 0 4px 8px 0;
 
-  /* ---------- Layout ---------- */
-  --container-wide: 1280px;
-  --container-narrow: 1080px;
-  --nav-height: 80px;
+  /* ---------- Layout (per DESIGN.md §Layout) ---------- */
+  --container-wide: 1280px;      /* editorial cap (DESIGN.md: ~1280px) */
+  --container-narrow: 1080px;    /* listing-detail cap (DESIGN.md: ~1080px) */
+  --container-wide-max: 1440px;  /* wide cap (DESIGN.md: > 1440px gutters absorb) */
+  --nav-height: 80px;            /* DESIGN.md: top-nav.height 80px */
+
+  /* ---------- Breakpoints (per DESIGN.md §Responsive Behavior) ----------
+     Mobile   : < 744px
+     Tablet   : 744 – 1128px
+     Desktop  : 1128 – 1440px
+     Wide     : > 1440px
+     ------------------------------------------------------------------ */
+  --bp-mobile: 744px;
+  --bp-tablet: 1128px;
+  --bp-wide:   1440px;
 }

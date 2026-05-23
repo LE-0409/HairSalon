@@ -107,9 +107,19 @@
 }
 
 /* ===============================================================
-   Responsive — sidebar becomes a horizontal scroll bar on tablets
+   Responsive (per DESIGN.md §Responsive Behavior)
+   Admin is internal — DESIGN.md does not spec this surface directly, so we
+   follow the spirit of the system: 2-col layouts collapse to 1-col on mobile,
+   sidebars become horizontal pill rows (mirrors the property-tab collapse).
+   Breakpoints: tablet at 1128px, mobile at 744px.
    =============================================================== */
-@media (max-width: 960px) {
+@media (max-width: 1127px) {
+  /* Tablet: keep the sidebar but tighten its width */
+  .admin-shell { grid-template-columns: 200px 1fr; }
+  .admin-main { padding: 28px 28px; }
+}
+
+@media (max-width: 743px) {
   .admin-shell {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -137,10 +147,6 @@
   .admin-side a.is-active {
     background: var(--color-ink); color: #fff; border-color: var(--color-ink);
   }
-  .admin-main { padding: 24px 20px; }
-}
-
-@media (max-width: 480px) {
   .admin-main { padding: 20px 16px; }
   .admin-main h1 { font-size: 22px; }
 }

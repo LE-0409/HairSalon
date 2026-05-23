@@ -39,13 +39,21 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 500; }
 
-/* ---------- Layout container ---------- */
+/* ---------- Layout container ----------
+   DESIGN.md §Layout: max content width ~1280px on home/editorial,
+   ~1080px on listing detail. Wide (>1440px) caps and gutters absorb. */
 .container {
   max-width: var(--container-wide);
   margin: 0 auto;
   padding: 0 24px;
 }
 .container--narrow { max-width: var(--container-narrow); }
+
+/* Wide cap — DESIGN.md: "Content width caps at 1440px on listing/search
+   pages and ~1280px on editorial; gutters absorb the rest." */
+@media (min-width: 1440px) {
+  .container { max-width: var(--container-wide); }
+}
 
 .section { padding: var(--s-section) 0; }
 .section--tight { padding: var(--s-xxl) 0; }
@@ -121,14 +129,15 @@ h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 500; }
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
 }
 
-/* ---------- Mobile (base) ---------- */
-@media (max-width: 720px) {
+/* ---------- Mobile (base) — DESIGN.md mobile band: < 744px ---------- */
+@media (max-width: 743px) {
   .container { padding: 0 16px; }
   .section { padding: 40px 0; }
   .section--tight { padding: 28px 0; }
 
   .sec-head h2 { font-size: 22px; }
 
+  /* DESIGN.md §Footer: 3-col → 1-col on mobile */
   .footer { padding: 32px 0 24px; margin-top: 40px; }
   .footer__cols { grid-template-columns: 1fr; gap: 20px; }
   .footer__legal { flex-direction: column; align-items: flex-start; }

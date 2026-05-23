@@ -12,19 +12,17 @@
 .grid-cards--3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cards--2 { grid-template-columns: repeat(2, 1fr); }
 
-@media (max-width: 1024px) {
-  .grid-cards { grid-template-columns: repeat(3, 1fr); }
+/* DESIGN.md §Responsive: "property cards 4-up (desktop) → 2-up (tablet) → 1-up (mobile)".
+   Breakpoints match the spec — tablet starts at 1128px, mobile at 744px.
+   Pattern: never reflow rows; reduce columns. */
+@media (max-width: 1127px) {
+  .grid-cards { grid-template-columns: repeat(2, 1fr); }
   .grid-cards--3 { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 720px) {
+@media (max-width: 743px) {
   .grid-cards,
   .grid-cards--3,
-  .grid-cards--2 { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
-}
-@media (max-width: 480px) {
-  .grid-cards,
-  .grid-cards--3,
-  .grid-cards--2 { grid-template-columns: 1fr; gap: 18px; }
+  .grid-cards--2 { grid-template-columns: 1fr; gap: 20px; }
 }
 
 /* ---------- Tone palette (shared) ---------- */
@@ -98,7 +96,7 @@
   font-size: var(--fs-body-sm); font-weight: 600;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 743px) {
   .designer-card__initial { font-size: 44px; }
 }
 
@@ -153,7 +151,7 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 743px) {
   .review-card__body { padding: 14px; }
 }
 
@@ -231,7 +229,7 @@
   margin-top: 6px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 743px) {
   .service-row { gap: 12px; padding: 12px; }
   .service-row.is-selected { padding: 11px; }
   .service-row__photo { width: 64px; height: 64px; }
@@ -266,7 +264,7 @@
   height: 2px; background: var(--color-ink); border-radius: 2px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 743px) {
   .cat-tabs { gap: 18px; }
   .cat-tab { font-size: var(--fs-body-sm); }
 }

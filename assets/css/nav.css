@@ -108,8 +108,10 @@
   display: flex; flex-direction: column; gap: 8px;
 }
 
-/* ---------- Breakpoints ---------- */
-@media (max-width: 880px) {
+/* ---------- Breakpoints (per DESIGN.md §Responsive) ----------
+   "Top nav collapses to logo + hamburger; product tabs hide behind
+   a sheet" — applied at the mobile band (<744px). */
+@media (max-width: 743px) {
   .topnav__inner { padding: 0 16px; gap: 12px; }
   .topnav__links { display: none; }
   .topnav__cta .btn { display: none; }

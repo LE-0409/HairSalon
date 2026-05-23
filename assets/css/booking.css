@@ -154,33 +154,37 @@
 .summary-bar .btn { flex-shrink: 0; }
 
 /* ===============================================================
-   Responsive
+   Responsive (per DESIGN.md §Responsive Behavior)
+   - Tablet 744–1128px : reservation card stays sticky right-rail at
+                         a narrower width.
+   - Mobile  <744px    : reservation card → sticky bottom bar,
+                         carrying just CTA + price summary.
    =============================================================== */
-@media (max-width: 960px) {
-  .booking-layout { grid-template-columns: 1fr; gap: 0; }
-  .summary-card { display: none; }
-  .summary-bar { display: flex; }
-  /* leave room for the bottom bar */
-  .booking-layout { padding-bottom: 96px; }
-}
-
-@media (max-width: 880px) {
+@media (max-width: 1127px) {
+  /* Tablet: keep the sticky right-rail but tighten its width */
+  .booking-layout { grid-template-columns: 1fr 320px; gap: 32px; }
   .pick-row { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 743px) {
+  /* Mobile: collapse to single column + sticky bottom bar */
+  .booking-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-bottom: 96px;
+  }
+  .summary-card { display: none; }
+  .summary-bar { display: flex; }
+
   .book-step h2 { font-size: 22px; }
   .stepper { gap: 8px; }
   .stepper__item { font-size: var(--fs-caption-sm); }
   .stepper__num { width: 24px; height: 24px; font-size: 12px; }
-}
 
-@media (max-width: 600px) {
+  /* Date-picker day cells must remain ≥40px (DESIGN.md §Touch Targets) */
+  .calendar { gap: 4px; }
+  .calendar__day { font-size: var(--fs-caption-sm); min-height: 40px; }
+
   .time-slots { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 480px) {
-  .calendar { gap: 2px; }
-  .calendar__day { font-size: var(--fs-caption-sm); }
-  .time-slot { padding: 10px 0; }
+  .time-slot { padding: 12px 0; min-height: 44px; }
 }
