@@ -1,5 +1,11 @@
 /* ===============================================================
    admin.css — Sidebar shell, data table, matrix table
+   Aligned to DESIGN.md §Layout / §Responsive Behavior:
+   - Tablet (744–1128px) : 2-col layout tightens (sidebar narrows)
+   - Mobile (<744px)     : sidebar collapses into a horizontal pill
+                           strip (mirrors product-tab collapse spec)
+                           and tables become horizontally scrollable
+                           with a soft right-edge fade as affordance.
    =============================================================== */
 
 .admin-shell {
@@ -39,12 +45,30 @@
 }
 .admin-main .lede { color: var(--color-muted); margin-bottom: 24px; }
 
+/* ---------- Section header (h1 + right-aligned action) ---------- */
+.admin-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 16px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.admin-section-head h1 { margin-bottom: 6px; }
+
+/* ---------- Filter chip row ---------- */
+.admin-filters {
+  display: flex; gap: 8px; margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
 /* ---------- Data table ---------- */
 .data-table-wrap {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: var(--r-md);
+  position: relative;
 }
 .data-table {
   width: 100%;
@@ -87,6 +111,7 @@
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 .matrix-table {
   width: 100%;
@@ -107,46 +132,85 @@
 }
 
 /* ===============================================================
-   Responsive (per DESIGN.md §Responsive Behavior)
-   Admin is internal — DESIGN.md does not spec this surface directly, so we
-   follow the spirit of the system: 2-col layouts collapse to 1-col on mobile,
-   sidebars become horizontal pill rows (mirrors the property-tab collapse).
-   Breakpoints: tablet at 1128px, mobile at 744px.
+   Tablet (744–1128px) — DESIGN.md §Responsive: 2-col tightens
    =============================================================== */
 @media (max-width: 1127px) {
-  /* Tablet: keep the sidebar but tighten its width */
   .admin-shell { grid-template-columns: 200px 1fr; }
   .admin-main { padding: 28px 28px; }
 }
 
+/* ===============================================================
+   Mobile (<744px) — DESIGN.md §Responsive:
+   "Top product tabs collapse into a hamburger sheet below 744px."
+   Admin sidebar mirrors this spec — it collapses into a horizontal
+   sticky pill strip beneath the top-nav. The hamburger sheet
+   simultaneously carries the full admin nav (handled in HTML).
+   =============================================================== */
 @media (max-width: 743px) {
   .admin-shell {
     grid-template-columns: 1fr;
     min-height: auto;
   }
+
+  /* Horizontal sticky pill strip — sits flush under the topnav.
+     --nav-height is 80px at 481–743px and 64px at <480px (set in nav.css). */
   .admin-side {
+    position: sticky;
+    top: var(--nav-height);
+    z-index: 30;
     border-right: none;
     border-bottom: 1px solid var(--color-hairline);
-    padding: 12px;
+    padding: 10px 16px;
     display: flex;
     overflow-x: auto;
-    gap: 4px;
+    gap: 6px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    background: var(--color-canvas);
   }
   .admin-side::-webkit-scrollbar { display: none; }
   .admin-side__title { display: none; }
   .admin-side a {
     flex-shrink: 0;
     padding: 8px 14px;
+    min-height: 36px;                       /* tappable */
+    display: inline-flex; align-items: center;
     border-radius: var(--r-full);
     background: var(--color-canvas);
     border: 1px solid var(--color-hairline);
+    font-size: var(--fs-body-sm);
   }
   .admin-side a:hover { background: var(--color-surface-strong); }
   .admin-side a.is-active {
-    background: var(--color-ink); color: #fff; border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: #fff;
+    border-color: var(--color-ink);
   }
+
+  /* Hide logout / account inside the pill row — keep them only in the
+     hamburger sheet to avoid clutter on the strip */
+  .admin-side a[data-mobile-hide] { display: none; }
+
   .admin-main { padding: 20px 16px; }
   .admin-main h1 { font-size: 22px; }
+  .admin-main .lede { font-size: var(--fs-body-sm); margin-bottom: 18px; }
+
+  /* Section header: action button drops below title */
+  .admin-section-head { align-items: flex-start; }
+  .admin-section-head > .btn { width: 100%; }
+
+  /* Status chip wraps so it doesn't bloat the table */
+  .data-table .status-chip { font-size: 11px; padding: 2px 8px; }
+
+  /* DESIGN.md trusts a single elevation tier — we reuse the card shadow
+     idea as a SOFT RIGHT-EDGE FADE so users see the table can scroll. */
+  .data-table-wrap,
+  .matrix-wrap {
+    /* mask-image keeps content crisp; the right edge fades for affordance */
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
+            mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
+  }
+
+  /* Filter chips fit smaller on phones */
+  .admin-filters .btn { padding: 8px 12px; height: auto; }
 }

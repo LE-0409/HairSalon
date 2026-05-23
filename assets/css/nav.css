@@ -120,7 +120,9 @@
 }
 
 @media (max-width: 480px) {
-  .topnav { height: 64px; }
+  /* Update the token so sticky offsets that depend on --nav-height
+     (e.g. admin sidebar pill row) stay flush under the topnav. */
+  :root { --nav-height: 64px; }
   .brand { font-size: 18px; }
   .brand__mark { width: 24px; height: 24px; font-size: 14px; }
 }
