@@ -1,0 +1,117 @@
+/* ===============================================================
+   designer.css — Designer detail page (hero + profile sections)
+   =============================================================== */
+
+.detail-hero {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 48px;
+  margin: 32px 0 40px;
+  align-items: center;
+}
+.detail-hero__photo {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg,#ffd9e1,#ff8aa3);
+  position: relative;
+  overflow: hidden;
+}
+.detail-hero__photo .designer-card__initial { font-size: 96px; }
+.detail-hero h1 {
+  font-size: 40px; font-weight: 600; letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+.detail-hero__role {
+  font-size: 18px; color: var(--color-muted);
+  margin-bottom: 16px;
+}
+.detail-hero__stats {
+  display: flex; gap: 32px; margin: 18px 0 24px;
+  flex-wrap: wrap;
+}
+.stat-block strong {
+  display: block;
+  font-size: 24px; font-weight: 700;
+  letter-spacing: -0.4px;
+}
+.stat-block span {
+  font-size: var(--fs-body-sm); color: var(--color-muted);
+}
+.detail-hero__cta {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+
+.profile-section {
+  border-top: 1px solid var(--color-hairline);
+  padding: 28px 0;
+}
+.profile-section h3 {
+  font-size: var(--fs-display-md);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.profile-section p {
+  color: var(--color-body); font-size: var(--fs-body); line-height: 1.7;
+}
+.profile-section ul li {
+  padding: 8px 0;
+  font-size: var(--fs-body);
+  color: var(--color-body);
+  border-bottom: 1px dashed var(--color-hairline-soft);
+}
+.profile-section ul li:last-child { border-bottom: none; }
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.portfolio-grid > div {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--r-md);
+}
+
+/* Kakao reservation card (re-used on designer detail) */
+.kakao-card {
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--r-md);
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 20px;
+  align-items: center;
+  background: var(--color-canvas);
+}
+.kakao-icon {
+  width: 56px; height: 56px;
+  border-radius: var(--r-full);
+  background: var(--color-kakao);
+  color: var(--color-kakao-ink);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 24px;
+}
+
+@media (max-width: 880px) {
+  .detail-hero { grid-template-columns: 1fr; gap: 24px; margin: 20px 0 32px; }
+  .detail-hero__photo { max-width: 280px; }
+  .detail-hero h1 { font-size: 30px; }
+  .detail-hero__role { font-size: 16px; }
+  .detail-hero__photo .designer-card__initial { font-size: 80px; }
+
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .kakao-card {
+    grid-template-columns: 56px 1fr;
+    gap: 14px;
+    padding: 20px;
+  }
+  .kakao-card .btn {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-hero__stats { gap: 20px; }
+  .stat-block strong { font-size: 20px; }
+}

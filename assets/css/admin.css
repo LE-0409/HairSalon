@@ -1,0 +1,146 @@
+/* ===============================================================
+   admin.css — Sidebar shell, data table, matrix table
+   =============================================================== */
+
+.admin-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: calc(100vh - var(--nav-height));
+}
+.admin-side {
+  border-right: 1px solid var(--color-hairline);
+  padding: 24px 16px;
+  background: var(--color-surface-soft);
+}
+.admin-side__title {
+  font-size: var(--fs-uppercase);
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+  font-weight: 700;
+  color: var(--color-muted);
+  margin: 14px 12px 8px;
+}
+.admin-side a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-body-sm);
+  color: var(--color-ink);
+  font-weight: 500;
+}
+.admin-side a:hover { background: var(--color-surface-strong); }
+.admin-side a.is-active {
+  background: var(--color-ink); color: #fff;
+}
+.admin-main { padding: 32px 40px; }
+.admin-main h1 {
+  font-size: 26px; font-weight: 600; letter-spacing: -0.6px;
+  margin-bottom: 6px;
+}
+.admin-main .lede { color: var(--color-muted); margin-bottom: 24px; }
+
+/* ---------- Data table ---------- */
+.data-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--r-md);
+}
+.data-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  background: var(--color-canvas);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid var(--color-hairline-soft);
+}
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-hairline-soft);
+  font-size: var(--fs-body-sm);
+  white-space: nowrap;
+}
+.data-table th {
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  background: var(--color-surface-soft);
+  color: var(--color-muted);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table .status-chip {
+  display: inline-flex;
+  font-size: var(--fs-caption-sm);
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+  background: var(--color-surface-strong);
+  font-weight: 600;
+}
+.data-table .status-chip--confirmed { background: #e6f4ec; color: #0c6b3d; }
+.data-table .status-chip--reminded  { background: #fdf1cc; color: #7d5b00; }
+.data-table .status-chip--done      { background: #ececec; color: #555; }
+
+/* ---------- Matrix table ---------- */
+.matrix-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.matrix-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+.matrix-table th, .matrix-table td {
+  border: 1px solid var(--color-hairline-soft);
+  padding: 10px;
+  text-align: center;
+  font-size: var(--fs-body-sm);
+  white-space: nowrap;
+}
+.matrix-table th:first-child,
+.matrix-table td:first-child { text-align: left; }
+.matrix-table input[type="checkbox"] {
+  width: 18px; height: 18px;
+}
+
+/* ===============================================================
+   Responsive — sidebar becomes a horizontal scroll bar on tablets
+   =============================================================== */
+@media (max-width: 960px) {
+  .admin-shell {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .admin-side {
+    border-right: none;
+    border-bottom: 1px solid var(--color-hairline);
+    padding: 12px;
+    display: flex;
+    overflow-x: auto;
+    gap: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .admin-side::-webkit-scrollbar { display: none; }
+  .admin-side__title { display: none; }
+  .admin-side a {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border-radius: var(--r-full);
+    background: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+  }
+  .admin-side a:hover { background: var(--color-surface-strong); }
+  .admin-side a.is-active {
+    background: var(--color-ink); color: #fff; border-color: var(--color-ink);
+  }
+  .admin-main { padding: 24px 20px; }
+}
+
+@media (max-width: 480px) {
+  .admin-main { padding: 20px 16px; }
+  .admin-main h1 { font-size: 22px; }
+}

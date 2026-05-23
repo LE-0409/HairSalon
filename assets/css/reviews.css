@@ -1,0 +1,19 @@
+/* ===============================================================
+   reviews.css — Reviews-page specific overrides
+   (cat-tabs lives in cards.css — shared with designers filter)
+   =============================================================== */
+
+.reviews-head h1 {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  margin-top: 8px;
+}
+
+@media (max-width: 720px) {
+  .reviews-head h1 { font-size: 26px; }
+}
+
+@media (max-width: 480px) {
+  .reviews-head h1 { font-size: 22px; }
+}

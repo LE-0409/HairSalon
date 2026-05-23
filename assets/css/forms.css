@@ -1,0 +1,43 @@
+/* ===============================================================
+   forms.css — Inputs, textareas, field labels
+   =============================================================== */
+
+.field {
+  display: block;
+  margin-bottom: 16px;
+}
+.field__label {
+  font-size: var(--fs-caption);
+  color: var(--color-muted);
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 500;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--r-sm);
+  padding: 14px 12px;
+  font: inherit;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  transition: border-color 0.15s ease;
+}
+.field textarea { min-height: 96px; resize: vertical; }
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-ink);
+  border-width: 2px;
+  padding: 13px 11px;
+}
+
+@media (max-width: 480px) {
+  .field input,
+  .field textarea,
+  .field select { padding: 12px 10px; font-size: 16px; /* prevent iOS zoom */ }
+  .field input:focus,
+  .field textarea:focus { padding: 11px 9px; }
+}

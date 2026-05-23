@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>김다현 대표 — Salon Rausch</title>
 <link rel="stylesheet" href="assets/css/tokens.css" />
-<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="stylesheet" href="assets/css/base.css" />
+<link rel="stylesheet" href="assets/css/nav.css" />
+<link rel="stylesheet" href="assets/css/buttons.css" />
+<link rel="stylesheet" href="assets/css/cards.css" />
+<link rel="stylesheet" href="assets/css/designer.css" />
 </head>
 <body>
 
@@ -23,8 +27,29 @@
       <a href="admin.html" class="btn btn--ghost btn--pill">관리자</a>
       <a href="booking.html" class="btn btn--primary btn--pill">예약하기</a>
     </div>
+    <button class="topnav__burger" aria-label="메뉴 열기">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>
+      </svg>
+    </button>
   </div>
 </header>
+
+<div class="mobile-sheet" aria-hidden="true">
+  <div class="mobile-sheet__panel">
+    <div class="mobile-sheet__top">
+      <span class="brand"><span class="brand__mark">R</span> Salon&nbsp;Rausch</span>
+      <button class="mobile-sheet__close" data-close-sheet aria-label="닫기">×</button>
+    </div>
+    <a href="designers.html" class="is-active">디자이너</a>
+    <a href="reviews.html">후기</a>
+    <a href="booking.html">예약하기</a>
+    <a href="admin.html">관리자</a>
+    <div class="mobile-sheet__cta">
+      <a href="booking.html" class="btn btn--primary btn--block">지금 예약하기</a>
+    </div>
+  </div>
+</div>
 
 <main>
   <section class="container container--narrow">
@@ -33,7 +58,6 @@
       <a href="designers.html" style="text-decoration: underline;">← 디자이너 전체</a>
     </p>
 
-    <!-- Hero -->
     <div class="detail-hero">
       <div class="detail-hero__photo">
         <span class="designer-card__initial">다</span>
@@ -49,24 +73,22 @@
           <div class="stat-block"><strong>342</strong><span>후기 수</span></div>
         </div>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div class="detail-hero__cta">
           <a href="booking.html" class="btn btn--primary">이 디자이너에게 예약</a>
           <a href="reviews.html?designer=dahyun" class="btn btn--secondary">디자이너 후기 보기</a>
         </div>
       </div>
     </div>
 
-    <!-- Bio -->
     <section class="profile-section">
       <h3>소개</h3>
-      <p style="color: var(--color-body); font-size: var(--fs-body); line-height: 1.7;">
+      <p>
         시술 전 두상과 머릿결, 그리고 자신의 라이프스타일을 충분히 듣고 시작합니다.
         화려한 변화보다 매일 아침 손질이 쉬워지는 시술을 선호합니다.
         프랑스 발레아쥬 기법을 한국인의 두상에 맞춰 변형한 시그니처 컷이 대표 작품입니다.
       </p>
     </section>
 
-    <!-- Specialties -->
     <section class="profile-section">
       <h3>전문 시술 분야</h3>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -79,7 +101,6 @@
       </div>
     </section>
 
-    <!-- Career -->
     <section class="profile-section">
       <h3>경력</h3>
       <ul>
@@ -90,7 +111,6 @@
       </ul>
     </section>
 
-    <!-- Education -->
     <section class="profile-section">
       <h3>교육 · 강사 이력</h3>
       <ul>
@@ -101,20 +121,18 @@
       </ul>
     </section>
 
-    <!-- Portfolio -->
     <section class="profile-section">
       <h3>대표 작품</h3>
       <div class="portfolio-grid">
-        <div data-tone="rose"   style="background: linear-gradient(135deg,#ffd9e1,#ff8aa3);"></div>
-        <div data-tone="cocoa"  style="background: linear-gradient(135deg,#e8d3bf,#a07259);"></div>
-        <div data-tone="warm"   style="background: linear-gradient(135deg,#fde2c7,#f3a261);"></div>
-        <div data-tone="forest" style="background: linear-gradient(135deg,#dde9d9,#7a9874);"></div>
-        <div data-tone="lilac"  style="background: linear-gradient(135deg,#e6dcef,#a991bb);"></div>
-        <div data-tone="cream"  style="background: linear-gradient(135deg,#f7f2e7,#d6c8a8);"></div>
+        <div data-tone="rose"></div>
+        <div data-tone="cocoa"></div>
+        <div data-tone="warm"></div>
+        <div data-tone="forest"></div>
+        <div data-tone="lilac"></div>
+        <div data-tone="cream"></div>
       </div>
     </section>
 
-    <!-- CTA card -->
     <section class="profile-section" style="border-bottom: none;">
       <div class="kakao-card" style="margin-top: 16px; background: var(--color-surface-soft);">
         <div class="kakao-icon">예</div>
@@ -145,6 +163,6 @@
   </div>
 </footer>
 
-<script src="assets/js/app.js"></script>
+<script src="assets/js/nav.js"></script>
 </body>
 </html>

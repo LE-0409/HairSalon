@@ -1,0 +1,148 @@
+/* ===============================================================
+   home.css — Hero, search pill, About section
+   =============================================================== */
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  padding: 56px 0 64px;
+  background: linear-gradient(180deg, #fff 0%, #fff7f7 100%);
+  overflow: hidden;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+.hero__copy .eyebrow { margin-bottom: 12px; }
+.hero__copy p {
+  font-size: 17px;
+  color: var(--color-body);
+  margin: 16px 0 28px;
+  max-width: 480px;
+}
+.hero__photo {
+  position: relative;
+  border-radius: var(--r-lg);
+  aspect-ratio: 5 / 6;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f3d6dc, #ffb8c5 55%, #ff7a92);
+}
+.hero__photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(at 30% 25%, rgba(255,255,255,0.6), transparent 55%),
+    radial-gradient(at 75% 80%, rgba(34,34,34,0.18), transparent 55%);
+}
+.hero__photo-label {
+  position: absolute; bottom: 20px; left: 20px;
+  background: rgba(255,255,255,0.95);
+  border-radius: var(--r-full);
+  padding: 8px 14px;
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  display: inline-flex; gap: 6px;
+  z-index: 1;
+  box-shadow: var(--shadow-card);
+}
+
+.hero__cta {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+
+/* ---------- Search-style booking pill ---------- */
+.searchpill {
+  margin: 32px auto 0;
+  background: var(--color-canvas);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--r-full);
+  height: 68px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr auto;
+  align-items: center;
+  box-shadow: var(--shadow-card);
+  max-width: 880px;
+  padding: 4px 4px 4px 0;
+}
+.searchpill__seg {
+  padding: 12px 24px;
+  border-right: 1px solid var(--color-hairline);
+}
+.searchpill__seg:last-of-type { border-right: none; }
+.searchpill__label {
+  display: block;
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: 2px;
+}
+.searchpill__value {
+  font-size: var(--fs-body-sm);
+  color: var(--color-muted);
+}
+.searchpill__orb {
+  background: var(--color-primary);
+  color: #fff;
+  width: 56px; height: 56px;
+  border-radius: var(--r-full);
+  display: grid; place-items: center;
+  margin-right: 6px;
+}
+.searchpill__orb:hover { background: var(--color-primary-active); }
+
+/* ---------- About ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.about-grid h2 {
+  font-size: 36px; font-weight: 600; letter-spacing: -0.8px;
+  margin: 12px 0 16px;
+}
+.about-grid p {
+  color: var(--color-body); font-size: 17px; max-width: 520px;
+}
+.about-grid ul {
+  margin-top: 20px;
+  font-size: var(--fs-body);
+  color: var(--color-body);
+}
+.about-grid ul li { padding: 6px 0; }
+.about-grid__photo {
+  border-radius: var(--r-lg);
+  aspect-ratio: 5 / 6;
+  background: linear-gradient(135deg, #f9f4e9, #dccfa9);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 880px) {
+  .hero { padding: 32px 0 40px; }
+  .hero__grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero__photo { aspect-ratio: 4 / 3; }
+  .hero__photo-label { bottom: 12px; left: 12px; }
+
+  /* Search pill collapses to a single tap */
+  .searchpill {
+    grid-template-columns: 1fr auto;
+    height: auto;
+    padding: 6px 6px 6px 18px;
+  }
+  .searchpill__seg {
+    padding: 10px 0;
+    border-right: none;
+  }
+  .searchpill__seg:not(:first-of-type) { display: none; }
+  .searchpill__orb { width: 48px; height: 48px; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 24px; }
+  .about-grid h2 { font-size: 26px; }
+  .about-grid__photo { aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 480px) {
+  .hero__copy p { font-size: 15px; }
+}

@@ -1,0 +1,124 @@
+/* ===============================================================
+   nav.css — Top navigation + brand + mobile hamburger menu
+   =============================================================== */
+
+.topnav {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--color-canvas);
+  border-bottom: 1px solid var(--color-hairline);
+  height: var(--nav-height);
+}
+.topnav__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.6px;
+}
+.brand__mark {
+  width: 28px; height: 28px;
+  border-radius: var(--r-full);
+  background: var(--color-primary);
+  display: inline-grid; place-items: center;
+  color: #fff; font-weight: 700;
+}
+.topnav__links {
+  display: flex; gap: 28px; align-items: center;
+}
+.topnav__links a {
+  font-size: var(--fs-title);
+  font-weight: 600;
+  color: var(--color-muted);
+  position: relative;
+  padding: 8px 0;
+}
+.topnav__links a.is-active {
+  color: var(--color-ink);
+}
+.topnav__links a.is-active::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -2px;
+  height: 2px; background: var(--color-ink);
+  border-radius: 2px;
+}
+.topnav__cta { display: flex; gap: 12px; align-items: center; }
+
+/* ---------- Mobile hamburger ---------- */
+.topnav__burger {
+  display: none;
+  width: 44px; height: 44px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--color-hairline);
+  align-items: center; justify-content: center;
+  color: var(--color-ink);
+}
+.topnav__burger:active { transform: scale(0.96); }
+.topnav__burger svg { width: 18px; height: 18px; }
+
+/* Mobile sheet (drawer) */
+.mobile-sheet {
+  position: fixed; inset: 0;
+  background: var(--color-scrim);
+  display: none;
+  z-index: 60;
+}
+.mobile-sheet.is-open { display: block; }
+.mobile-sheet__panel {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: min(320px, 88vw);
+  background: var(--color-canvas);
+  padding: 24px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+.mobile-sheet__top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.mobile-sheet__close {
+  width: 36px; height: 36px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--color-hairline);
+  display: grid; place-items: center;
+}
+.mobile-sheet a {
+  padding: 14px 12px;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-title);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.mobile-sheet a:hover { background: var(--color-surface-soft); }
+.mobile-sheet a.is-active { background: var(--color-surface-strong); }
+.mobile-sheet__cta {
+  margin-top: 12px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+/* ---------- Breakpoints ---------- */
+@media (max-width: 880px) {
+  .topnav__inner { padding: 0 16px; gap: 12px; }
+  .topnav__links { display: none; }
+  .topnav__cta .btn { display: none; }
+  .topnav__cta .btn--primary { display: inline-flex; }
+  .topnav__burger { display: inline-flex; }
+}
+
+@media (max-width: 480px) {
+  .topnav { height: 64px; }
+  .brand { font-size: 18px; }
+  .brand__mark { width: 24px; height: 24px; font-size: 14px; }
+}

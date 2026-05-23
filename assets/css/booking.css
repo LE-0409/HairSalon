@@ -1,0 +1,186 @@
+/* ===============================================================
+   booking.css — 5-step booking flow, stepper, calendar,
+   time slots, summary card (sticky → bottom bar on mobile)
+   =============================================================== */
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 48px;
+  margin: 32px 0 64px;
+  align-items: flex-start;
+}
+
+/* ---------- Stepper ---------- */
+.stepper {
+  display: flex; gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.stepper__item {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: var(--fs-body-sm);
+  color: var(--color-muted);
+}
+.stepper__num {
+  width: 28px; height: 28px; border-radius: var(--r-full);
+  background: var(--color-surface-strong);
+  display: inline-grid; place-items: center;
+  font-weight: 700; font-size: 13px;
+}
+.stepper__item.is-active .stepper__num {
+  background: var(--color-ink); color: #fff;
+}
+.stepper__item.is-active { color: var(--color-ink); font-weight: 600; }
+.stepper__item.is-done .stepper__num {
+  background: var(--color-primary); color: #fff;
+}
+
+/* ---------- Step block ---------- */
+.book-step h2 {
+  font-size: 26px; font-weight: 600; letter-spacing: -0.6px;
+  margin-bottom: 8px;
+}
+.book-step p.lede {
+  font-size: var(--fs-body); color: var(--color-muted);
+  margin-bottom: 24px;
+}
+.book-step + .book-step {
+  border-top: 1px solid var(--color-hairline);
+  padding-top: 32px;
+  margin-top: 32px;
+}
+
+/* ---------- Designer pick row ---------- */
+.pick-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* ---------- Calendar ---------- */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 24px;
+}
+.calendar__head {
+  font-size: var(--fs-caption-sm);
+  color: var(--color-muted);
+  text-align: center;
+  padding: 8px 0;
+  font-weight: 600;
+}
+.calendar__day {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-full);
+  display: grid; place-items: center;
+  font-size: var(--fs-body-sm);
+  cursor: pointer;
+  color: var(--color-ink);
+}
+.calendar__day:hover { background: var(--color-surface-soft); }
+.calendar__day.is-muted { color: var(--color-muted-soft); cursor: default; }
+.calendar__day.is-disabled { color: var(--color-muted-soft); text-decoration: line-through; cursor: not-allowed; }
+.calendar__day.is-selected { background: var(--color-ink); color: #fff; font-weight: 600; }
+
+/* ---------- Time slots ---------- */
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.time-slot {
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--r-sm);
+  padding: 12px 0;
+  text-align: center;
+  font-size: var(--fs-body-sm);
+  cursor: pointer;
+  background: var(--color-canvas);
+}
+.time-slot:hover { border-color: var(--color-ink); }
+.time-slot.is-selected { background: var(--color-ink); color: #fff; border-color: var(--color-ink); }
+.time-slot.is-disabled { color: var(--color-muted-soft); cursor: not-allowed; background: var(--color-surface-soft); }
+
+/* ---------- Sticky summary ---------- */
+.summary-card {
+  position: sticky; top: 96px;
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--r-md);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  background: var(--color-canvas);
+}
+.summary-card h3 {
+  font-size: var(--fs-display-md);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.summary-row {
+  display: flex; justify-content: space-between; gap: 12px;
+  padding: 10px 0;
+  font-size: var(--fs-body-sm);
+}
+.summary-row dt { color: var(--color-muted); font-weight: 500; }
+.summary-row dd { margin: 0; color: var(--color-ink); font-weight: 600; text-align: right; }
+.summary-total {
+  display: flex; justify-content: space-between;
+  border-top: 1px solid var(--color-hairline);
+  margin-top: 12px;
+  padding-top: 16px;
+  font-size: var(--fs-title);
+  font-weight: 700;
+}
+
+/* ---------- Mobile bottom bar (replaces summary card) ---------- */
+.summary-bar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 40;
+  background: var(--color-canvas);
+  border-top: 1px solid var(--color-hairline);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.08);
+  align-items: center; gap: 12px;
+}
+.summary-bar__total {
+  flex: 1;
+  display: flex; flex-direction: column;
+}
+.summary-bar__total strong { font-size: var(--fs-title); font-weight: 700; }
+.summary-bar__total span { font-size: var(--fs-caption-sm); color: var(--color-muted); }
+.summary-bar .btn { flex-shrink: 0; }
+
+/* ===============================================================
+   Responsive
+   =============================================================== */
+@media (max-width: 960px) {
+  .booking-layout { grid-template-columns: 1fr; gap: 0; }
+  .summary-card { display: none; }
+  .summary-bar { display: flex; }
+  /* leave room for the bottom bar */
+  .booking-layout { padding-bottom: 96px; }
+}
+
+@media (max-width: 880px) {
+  .pick-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .book-step h2 { font-size: 22px; }
+  .stepper { gap: 8px; }
+  .stepper__item { font-size: var(--fs-caption-sm); }
+  .stepper__num { width: 24px; height: 24px; font-size: 12px; }
+}
+
+@media (max-width: 600px) {
+  .time-slots { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .calendar { gap: 2px; }
+  .calendar__day { font-size: var(--fs-caption-sm); }
+  .time-slot { padding: 10px 0; }
+}
