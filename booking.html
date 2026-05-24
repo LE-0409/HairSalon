@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="assets/css/cards.css" />
 <link rel="stylesheet" href="assets/css/designer.css" />
 <link rel="stylesheet" href="assets/css/booking.css" />
+<link rel="stylesheet" href="assets/css/interactions.css" />
 </head>
 <body>
 
@@ -58,9 +59,9 @@
 
     <div class="stepper">
       <span class="stepper__item is-done"><span class="stepper__num">1</span>카카오 로그인</span>
-      <span class="stepper__item is-active"><span class="stepper__num">2</span>디자이너 선택</span>
-      <span class="stepper__item is-active"><span class="stepper__num">3</span>시술 선택</span>
-      <span class="stepper__item is-active"><span class="stepper__num">4</span>날짜·시간</span>
+      <span class="stepper__item"><span class="stepper__num">2</span>디자이너 선택</span>
+      <span class="stepper__item"><span class="stepper__num">3</span>시술 선택</span>
+      <span class="stepper__item"><span class="stepper__num">4</span>날짜·시간</span>
       <span class="stepper__item"><span class="stepper__num">5</span>확인 & 예약</span>
     </div>
 
@@ -86,88 +87,70 @@
           <p class="lede">디자이너별로 가능한 시술이 달라요.</p>
 
           <div class="pick-row">
-            <div class="pick-card is-selected" data-pick data-pick-group="designer" data-label="김다현 (대표·16년차)">
+            <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="dahyun" data-label="김다현 (대표·16년차)">
               <div class="pick-card__photo" data-tone="rose">
                 <span class="designer-card__initial">다</span>
               </div>
               <h4>김다현</h4>
               <p>대표 · 16년차</p>
             </div>
-            <div class="pick-card" data-pick data-pick-group="designer" data-label="박수아 (부원장·11년차)">
+            <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="sooa" data-label="박수아 (부원장·11년차)">
               <div class="pick-card__photo" data-tone="warm">
                 <span class="designer-card__initial">수</span>
               </div>
               <h4>박수아</h4>
               <p>부원장 · 11년차</p>
             </div>
-            <div class="pick-card" data-pick data-pick-group="designer" data-label="이민지 (실장·8년차)">
+            <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="minji" data-label="이민지 (실장·8년차)">
               <div class="pick-card__photo" data-tone="cocoa">
                 <span class="designer-card__initial">민</span>
               </div>
               <h4>이민지</h4>
               <p>실장 · 8년차</p>
             </div>
-            <div class="pick-card" data-pick data-pick-group="designer" data-label="정현우 (디자이너·6년차)">
+            <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="hyunwoo" data-label="정현우 (디자이너·6년차)">
               <div class="pick-card__photo" data-tone="lilac">
                 <span class="designer-card__initial">현</span>
               </div>
               <h4>정현우</h4>
               <p>디자이너 · 6년차</p>
             </div>
+            <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="suyoung" data-label="유서영 (실장·9년차)">
+              <div class="pick-card__photo" data-tone="ocean">
+                <span class="designer-card__initial">유</span>
+              </div>
+              <h4>유서영</h4>
+              <p>실장 · 9년차</p>
+            </div>
+            <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="taeri" data-label="한태리 (디자이너·5년차)">
+              <div class="pick-card__photo" data-tone="forest">
+                <span class="designer-card__initial">태</span>
+              </div>
+              <h4>한태리</h4>
+              <p>디자이너 · 5년차</p>
+            </div>
+            <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="seoyoon" data-label="최서윤 (디자이너·4년차)">
+              <div class="pick-card__photo" data-tone="cream">
+                <span class="designer-card__initial">서</span>
+              </div>
+              <h4>최서윤</h4>
+              <p>디자이너 · 4년차</p>
+            </div>
+            <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="junho" data-label="강준호 (디자이너·5년차)">
+              <div class="pick-card__photo" data-tone="charcoal">
+                <span class="designer-card__initial">준</span>
+              </div>
+              <h4>강준호</h4>
+              <p>디자이너 · 5년차</p>
+            </div>
           </div>
         </section>
 
         <section class="book-step">
           <h2>3. 시술을 선택해주세요</h2>
-          <p class="lede"><strong>김다현 대표</strong>가 가능한 시술만 보여드려요.</p>
+          <p class="lede" data-service-lede>디자이너를 먼저 선택해주세요.</p>
 
-          <div class="service-row is-selected" data-pick data-pick-group="service" data-label="시그니처 컷" data-price="₩ 80,000">
-            <div class="service-row__photo" data-tone="rose"></div>
-            <div class="service-row__main">
-              <div class="service-row__title">
-                <span>시그니처 컷</span>
-                <span class="service-row__price">₩ 80,000</span>
-              </div>
-              <div class="service-row__desc">두상·머릿결·라이프스타일을 1:1로 진단하고 김다현 대표가 직접 컷합니다.</div>
-              <div class="service-row__time">⏱ 약 60분</div>
-            </div>
-          </div>
-
-          <div class="service-row" data-pick data-pick-group="service" data-label="발레아쥬 (염색)" data-price="₩ 220,000">
-            <div class="service-row__photo" data-tone="warm"></div>
-            <div class="service-row__main">
-              <div class="service-row__title">
-                <span>발레아쥬 (염색)</span>
-                <span class="service-row__price">₩ 220,000</span>
-              </div>
-              <div class="service-row__desc">자연스러운 그라데이션. 햇빛에 색이 살아나는 시그니처 컬러.</div>
-              <div class="service-row__time">⏱ 약 180분</div>
-            </div>
-          </div>
-
-          <div class="service-row" data-pick data-pick-group="service" data-label="레이어드 컷" data-price="₩ 65,000">
-            <div class="service-row__photo" data-tone="lilac"></div>
-            <div class="service-row__main">
-              <div class="service-row__title">
-                <span>레이어드 컷</span>
-                <span class="service-row__price">₩ 65,000</span>
-              </div>
-              <div class="service-row__desc">긴 머리 가볍게, 짧은 머리에 입체감을. 결대로 정리합니다.</div>
-              <div class="service-row__time">⏱ 약 45분</div>
-            </div>
-          </div>
-
-          <div class="service-row" data-pick data-pick-group="service" data-label="두피 클리닉" data-price="₩ 85,000">
-            <div class="service-row__photo" data-tone="forest"></div>
-            <div class="service-row__main">
-              <div class="service-row__title">
-                <span>두피 클리닉</span>
-                <span class="service-row__price">₩ 85,000</span>
-              </div>
-              <div class="service-row__desc">두피 진단 후 맞춤 케어. 시술과 함께 받으시면 더 효과적이에요.</div>
-              <div class="service-row__time">⏱ 약 40분</div>
-            </div>
-          </div>
+          <div data-service-list></div>
         </section>
 
         <section class="book-step">
@@ -197,7 +180,7 @@
             <div class="calendar__day">9</div>
             <div class="calendar__day">10</div>
             <div class="calendar__day">11</div>
-            <div class="calendar__day is-selected" data-label="6월 12일 (금)">12</div>
+            <div class="calendar__day" data-label="6월 12일 (금)">12</div>
             <div class="calendar__day">13</div>
 
             <div class="calendar__day">14</div>
@@ -233,7 +216,7 @@
             <div class="time-slot is-disabled">12:30</div>
             <div class="time-slot">13:00</div>
             <div class="time-slot">13:30</div>
-            <div class="time-slot is-selected">14:00</div>
+            <div class="time-slot">14:00</div>
             <div class="time-slot">14:30</div>
             <div class="time-slot">15:00</div>
             <div class="time-slot is-disabled">15:30</div>
@@ -277,15 +260,15 @@
       <aside class="summary-card">
         <h3>예약 요약</h3>
         <dl>
-          <div class="summary-row"><dt>디자이너</dt><dd data-summary="designer">김다현 (대표·16년차)</dd></div>
-          <div class="summary-row"><dt>시술</dt><dd data-summary="service">시그니처 컷</dd></div>
-          <div class="summary-row"><dt>날짜</dt><dd data-summary="date">6월 12일 (금)</dd></div>
-          <div class="summary-row"><dt>시간</dt><dd data-summary="time">14:00</dd></div>
-          <div class="summary-row"><dt>예상 소요</dt><dd>약 60분</dd></div>
+          <div class="summary-row"><dt>디자이너</dt><dd data-summary="designer">—</dd></div>
+          <div class="summary-row"><dt>시술</dt><dd data-summary="service">—</dd></div>
+          <div class="summary-row"><dt>날짜</dt><dd data-summary="date">—</dd></div>
+          <div class="summary-row"><dt>시간</dt><dd data-summary="time">—</dd></div>
+          <div class="summary-row"><dt>예상 소요</dt><dd>—</dd></div>
         </dl>
         <div class="summary-total">
           <span>합계</span>
-          <span data-summary="price">₩ 80,000</span>
+          <span data-summary="price">—</span>
         </div>
         <button class="btn btn--primary btn--block" style="margin-top: 16px;">예약 확정하기</button>
         <p class="muted" style="font-size: var(--fs-caption-sm); margin-top: 12px; text-align: center;">
@@ -299,8 +282,8 @@
   <!-- Mobile bottom bar (replaces summary card on small screens) -->
   <div class="summary-bar" role="region" aria-label="예약 요약">
     <div class="summary-bar__total">
-      <strong data-summary="price">₩ 80,000</strong>
-      <span><span data-summary="date">6월 12일 (금)</span> · <span data-summary="time">14:00</span></span>
+      <strong data-summary="price">—</strong>
+      <span><span data-summary="date">—</span> · <span data-summary="time">—</span></span>
     </div>
     <button class="btn btn--primary">예약 확정</button>
   </div>
@@ -320,6 +303,7 @@
   </div>
 </footer>
 
+<script src="assets/js/common.js"></script>
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/booking.js"></script>
 </body>
