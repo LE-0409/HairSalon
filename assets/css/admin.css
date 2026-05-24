@@ -13,6 +13,19 @@
   grid-template-columns: 240px 1fr;
   min-height: calc(100vh - var(--nav-height));
 }
+
+/* ---------- CRITICAL: Grid-item min-width override ----------
+   CSS Grid items default to `min-width: auto` (= min-content), which makes
+   the column expand to the widest non-breakable child. Our .admin-main
+   contains <table> elements with min-width: 720px (intentional for horizontal
+   scroll). Without this override, that 720px propagates up — the grid column
+   becomes 720px, the admin-shell becomes wider than the viewport on mobile,
+   and the whole page horizontally overflows.
+   Setting min-width: 0 lets the grid track win — tables then scroll inside
+   their own .data-table-wrap / .matrix-wrap (which have overflow-x: auto). */
+.admin-side,
+.admin-main { min-width: 0; }
+
 .admin-side {
   border-right: 1px solid var(--color-hairline);
   padding: 24px 16px;
@@ -65,6 +78,7 @@
 /* ---------- Data table ---------- */
 .data-table-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: var(--r-md);
@@ -109,6 +123,7 @@
 /* ---------- Matrix table ---------- */
 .matrix-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   position: relative;
