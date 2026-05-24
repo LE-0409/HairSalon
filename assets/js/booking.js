@@ -11,19 +11,22 @@
 (function () {
   "use strict";
 
-  /* ---------- Catalog (would come from API in full-stack stage) ---------- */
+  /* ---------- Catalog (would come from API in full-stack stage) ----------
+     `minutes` is always one of {30, 60, 120, 180} so it lines up with
+     the 30-min time-slot grid below. */
   const SERVICES = {
-    signature: { label: "시그니처 컷",    price: "₩ 80,000",  desc: "두상·머릿결·라이프스타일을 1:1로 진단하고 직접 컷합니다.", time: "약 60분",  tone: "rose" },
-    balayage:  { label: "발레아쥬 (염색)", price: "₩ 220,000", desc: "자연스러운 그라데이션. 햇빛에 색이 살아나는 시그니처 컬러.", time: "약 180분", tone: "warm" },
-    layered:   { label: "레이어드 컷",    price: "₩ 65,000",  desc: "긴 머리 가볍게, 짧은 머리에 입체감을. 결대로 정리합니다.", time: "약 45분",  tone: "lilac" },
-    scalp:     { label: "두피 클리닉",    price: "₩ 85,000",  desc: "두피 진단 후 맞춤 케어. 시술과 함께 받으시면 더 효과적이에요.", time: "약 40분",  tone: "forest" },
-    downperm:  { label: "남자 다운펌",    price: "₩ 95,000",  desc: "자고 일어나도 망가지지 않는 결대로의 펌.",            time: "약 90분",  tone: "cocoa" },
-    babyperm:  { label: "베이비펌",      price: "₩ 110,000", desc: "자연스러운 C컬, 손상 최소화 처방.",                  time: "약 120분", tone: "lilac" },
-    ash:       { label: "애쉬 컬러",     price: "₩ 180,000", desc: "노란기 없는 깔끔한 회갈색 톤.",                       time: "약 150분", tone: "ocean" },
-    ombre:     { label: "옴브레",        price: "₩ 160,000", desc: "탈색 자국 없는 자연스런 그라데이션.",                 time: "약 140분", tone: "warm" },
-    mens:      { label: "남자컷",        price: "₩ 38,000",  desc: "댄디·투블럭 등 결대로 깔끔하게 다듬어드립니다.",       time: "약 30분",  tone: "charcoal" },
-    dandy:     { label: "댄디컷",        price: "₩ 42,000",  desc: "부드럽게 흐르는 라인의 클래식 남자 스타일.",          time: "약 35분",  tone: "charcoal" },
+    signature: { label: "시그니처 컷",    price: "₩ 80,000",  desc: "두상·머릿결·라이프스타일을 1:1로 진단하고 직접 컷합니다.", minutes: 60,  tone: "rose" },
+    balayage:  { label: "발레아쥬 (염색)", price: "₩ 220,000", desc: "자연스러운 그라데이션. 햇빛에 색이 살아나는 시그니처 컬러.", minutes: 180, tone: "warm" },
+    layered:   { label: "레이어드 컷",    price: "₩ 65,000",  desc: "긴 머리 가볍게, 짧은 머리에 입체감을. 결대로 정리합니다.", minutes: 30,  tone: "lilac" },
+    scalp:     { label: "두피 클리닉",    price: "₩ 85,000",  desc: "두피 진단 후 맞춤 케어. 시술과 함께 받으시면 더 효과적이에요.", minutes: 30,  tone: "forest" },
+    downperm:  { label: "남자 다운펌",    price: "₩ 95,000",  desc: "자고 일어나도 망가지지 않는 결대로의 펌.",            minutes: 120, tone: "cocoa" },
+    babyperm:  { label: "베이비펌",      price: "₩ 110,000", desc: "자연스러운 C컬, 손상 최소화 처방.",                  minutes: 120, tone: "lilac" },
+    ash:       { label: "애쉬 컬러",     price: "₩ 180,000", desc: "노란기 없는 깔끔한 회갈색 톤.",                       minutes: 180, tone: "ocean" },
+    ombre:     { label: "옴브레",        price: "₩ 160,000", desc: "탈색 자국 없는 자연스런 그라데이션.",                 minutes: 180, tone: "warm" },
+    mens:      { label: "남자컷",        price: "₩ 38,000",  desc: "댄디·투블럭 등 결대로 깔끔하게 다듬어드립니다.",       minutes: 30,  tone: "charcoal" },
+    dandy:     { label: "댄디컷",        price: "₩ 42,000",  desc: "부드럽게 흐르는 라인의 클래식 남자 스타일.",          minutes: 30,  tone: "charcoal" },
   };
+  const durationText = (m) => `약 ${m}분`;
 
   const DESIGNERS = {
     dahyun:  { label: "김다현 (대표·16년차)",   short: "김다현 대표",   services: ["signature", "balayage", "layered", "scalp"] },
@@ -79,6 +82,53 @@
     });
   }
 
+  /* ---------- Time-slot availability ----------
+     A slot is bookable only if it + the next (duration/30 − 1) slots are
+     all unbooked. Snapshot the initial booked state once via data-booked so
+     we can re-evaluate when the selected service (and its duration) changes. */
+  const allSlots = [...document.querySelectorAll(".time-slot")];
+  allSlots.forEach((s) => {
+    if (s.classList.contains("is-disabled")) s.dataset.booked = "true";
+  });
+
+  function updateTimeAvailability() {
+    if (!allSlots.length) return;
+    const service = state.serviceId ? SERVICES[state.serviceId] : null;
+    const needed = service ? service.minutes / 30 : 1;
+
+    allSlots.forEach((slot, i) => {
+      if (slot.dataset.booked === "true") {
+        slot.classList.add("is-disabled");
+        return;
+      }
+      if (!service) {
+        slot.classList.remove("is-disabled");
+        return;
+      }
+      let canFit = true;
+      for (let k = 0; k < needed; k++) {
+        const nxt = allSlots[i + k];
+        if (!nxt || nxt.dataset.booked === "true") {
+          canFit = false;
+          break;
+        }
+      }
+      slot.classList.toggle("is-disabled", !canFit);
+    });
+
+    // If the currently-selected slot just became disabled, clear it.
+    const sel = document.querySelector(".time-slot.is-selected");
+    if (sel && sel.classList.contains("is-disabled")) {
+      sel.classList.remove("is-selected");
+      setSummary("time", "");
+      if (window.toast)
+        window.toast("선택한 시간은 이 시술 길이에 맞지 않아 해제되었어요", {
+          variant: "error",
+          duration: 2400,
+        });
+    }
+  }
+
   /* ---------- Reset helpers ---------- */
   function clearDateTime() {
     document
@@ -102,6 +152,8 @@
     state.serviceId = null;
     setSummary("service", "");
     setSummary("price", "");
+    setSummary("duration", "");
+    updateTimeAvailability();
 
     const designer = DESIGNERS[designerId];
     if (!designer) {
@@ -124,7 +176,7 @@
                 <span class="service-row__price">${s.price}</span>
               </div>
               <div class="service-row__desc">${s.desc}</div>
-              <div class="service-row__time">⏱ ${s.time}</div>
+              <div class="service-row__time">⏱ ${durationText(s.minutes)}</div>
             </div>
           </div>`;
       })
@@ -158,6 +210,9 @@
     } else if (group === "service") {
       if (card.dataset.serviceId) state.serviceId = card.dataset.serviceId;
       if (card.dataset.price) setSummary("price", card.dataset.price);
+      const svc = SERVICES[state.serviceId];
+      setSummary("duration", svc ? durationText(svc.minutes) : "");
+      updateTimeAvailability();
     }
     updateStepper();
 
