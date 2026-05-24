@@ -12,6 +12,12 @@
   display: grid;
   grid-template-columns: 240px 1fr;
   min-height: calc(100vh - var(--nav-height));
+  background: linear-gradient(
+    to right,
+    var(--color-surface-soft) 0 239px,
+    var(--color-hairline) 239px 240px,
+    transparent 240px
+  );
 }
 
 /* ---------- CRITICAL: Grid-item min-width override ----------
@@ -27,9 +33,12 @@
 .admin-main { min-width: 0; }
 
 .admin-side {
-  border-right: 1px solid var(--color-hairline);
   padding: 24px 16px;
-  background: var(--color-surface-soft);
+  position: sticky;
+  top: var(--nav-height);
+  align-self: start;
+  max-height: calc(100vh - var(--nav-height));
+  overflow-y: auto;
 }
 .admin-side__title {
   font-size: var(--fs-uppercase);
@@ -150,7 +159,15 @@
    Tablet (744–1128px) — DESIGN.md §Responsive: 2-col tightens
    =============================================================== */
 @media (max-width: 1127px) {
-  .admin-shell { grid-template-columns: 200px 1fr; }
+  .admin-shell {
+    grid-template-columns: 200px 1fr;
+    background: linear-gradient(
+      to right,
+      var(--color-surface-soft) 0 199px,
+      var(--color-hairline) 199px 200px,
+      transparent 200px
+    );
+  }
   .admin-main { padding: 28px 28px; }
 }
 
@@ -165,6 +182,7 @@
   .admin-shell {
     grid-template-columns: 1fr;
     min-height: auto;
+    background: none;
   }
 
   /* Horizontal sticky pill strip — sits flush under the topnav.
@@ -173,6 +191,9 @@
     position: sticky;
     top: var(--nav-height);
     z-index: 30;
+    align-self: auto;
+    max-height: none;
+    overflow-y: visible;
     border-right: none;
     border-bottom: 1px solid var(--color-hairline);
     padding: 10px 16px;
