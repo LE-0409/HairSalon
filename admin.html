@@ -50,10 +50,9 @@
     <span class="admin-side__title" style="display:block; padding: 8px 12px 4px; font-size: var(--fs-uppercase); text-transform: uppercase; letter-spacing:.32px; color: var(--color-muted); font-weight: 700;">콘텐츠</span>
     <a href="#services" data-close-sheet>시술 메뉴</a>
     <a href="#designers" data-close-sheet>디자이너 관리</a>
-    <a href="#matrix" data-close-sheet>디자이너-시술 매핑</a>
 
     <span class="admin-side__title" style="display:block; padding: 8px 12px 4px; font-size: var(--fs-uppercase); text-transform: uppercase; letter-spacing:.32px; color: var(--color-muted); font-weight: 700;">계정</span>
-    <a href="#account" data-close-sheet>관리자 계정</a>
+    <a href="#account" data-close-sheet data-modal-target="account-modal">관리자 계정</a>
     <a href="index.html">사이트로 가기</a>
     <a href="index.html">로그아웃</a>
   </div>
@@ -68,10 +67,9 @@
     <div class="admin-side__title">콘텐츠</div>
     <a href="#services">시술 메뉴</a>
     <a href="#designers">디자이너 관리</a>
-    <a href="#matrix">디자이너-시술 매핑</a>
 
     <div class="admin-side__title">계정</div>
-    <a href="#account" data-mobile-hide>관리자 계정</a>
+    <a href="#account" data-mobile-hide data-modal-target="account-modal">관리자 계정</a>
     <a href="index.html" data-mobile-hide>로그아웃</a>
   </aside>
 
@@ -256,92 +254,351 @@
       </div>
     </section>
 
-    <section id="matrix" style="margin-top: 64px;">
-      <h1>디자이너 × 시술 매핑</h1>
-      <p class="lede">체크된 시술만 예약하기 페이지에서 해당 디자이너에게 노출됩니다.</p>
-
-      <div class="matrix-wrap">
-        <table class="matrix-table" style="margin-top: 16px;">
-          <thead>
-            <tr>
-              <th style="width: 200px;">디자이너 \ 시술</th>
-              <th>시그니처 컷</th>
-              <th>발레아쥬</th>
-              <th>다운펌</th>
-              <th>베이비펌</th>
-              <th>두피 클리닉</th>
-              <th>애쉬 컬러</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>김다현</strong><div class="muted" style="font-size: var(--fs-caption-sm);">대표 · 16년차</div></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-            </tr>
-            <tr>
-              <td><strong>박수아</strong><div class="muted" style="font-size: var(--fs-caption-sm);">부원장 · 11년차</div></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-            </tr>
-            <tr>
-              <td><strong>이민지</strong><div class="muted" style="font-size: var(--fs-caption-sm);">실장 · 8년차</div></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-            </tr>
-            <tr>
-              <td><strong>정현우</strong><div class="muted" style="font-size: var(--fs-caption-sm);">디자이너 · 6년차</div></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" checked /></td>
-            </tr>
-            <tr>
-              <td><strong>유서영</strong><div class="muted" style="font-size: var(--fs-caption-sm);">실장 · 9년차</div></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-            </tr>
-            <tr>
-              <td><strong>한태리</strong><div class="muted" style="font-size: var(--fs-caption-sm);">디자이너 · 5년차</div></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" checked /></td>
-              <td><input type="checkbox" /></td>
-            </tr>
-          </tbody>
-        </table>
+    <section id="designers" style="margin-top: 64px;">
+      <div class="admin-section-head">
+        <div>
+          <h1>디자이너 관리</h1>
+          <p class="lede">소속 디자이너 프로필을 관리합니다. 이름, 직급, 경력, 소개를 편집하거나 신규 디자이너를 추가할 수 있습니다.</p>
+        </div>
+        <button class="btn btn--primary">+ 디자이너 추가</button>
       </div>
 
-      <div style="margin-top: 16px; display:flex; gap:12px; flex-wrap: wrap;">
-        <button class="btn btn--primary">저장</button>
-        <button class="btn btn--secondary">초기화</button>
+      <div class="grid-cards grid-cards--3">
+
+        <article class="review-card" data-designer="김다현" data-role="대표" data-years="16" data-bio="16년차 · 시그니처 컷, 발레아쥬 전문" data-services="시그니처 컷,발레아쥬,두피 클리닉">
+          <div class="review-card__photo" data-tone="rose" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">김다현</h4>
+              <span class="tag tag--ink">대표</span>
+            </div>
+            <p class="review-card__excerpt">16년차 · 시그니처 컷, 발레아쥬 전문</p>
+            <div class="review-card__foot">
+              <span class="js-service-count">가능 시술 3개</span>
+              <button class="btn btn--ghost btn--pill js-edit-designer" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card" data-designer="박수아" data-role="부원장" data-years="11" data-bio="11년차 · 컷, 다운펌, 클리닉" data-services="시그니처 컷,다운펌,두피 클리닉">
+          <div class="review-card__photo" data-tone="warm" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">박수아</h4>
+              <span class="tag">부원장</span>
+            </div>
+            <p class="review-card__excerpt">11년차 · 컷, 다운펌, 클리닉</p>
+            <div class="review-card__foot">
+              <span class="js-service-count">가능 시술 3개</span>
+              <button class="btn btn--ghost btn--pill js-edit-designer" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card" data-designer="이민지" data-role="실장" data-years="8" data-bio="8년차 · 컷, 베이비펌, 클리닉" data-services="시그니처 컷,베이비펌,두피 클리닉">
+          <div class="review-card__photo" data-tone="lilac" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">이민지</h4>
+              <span class="tag">실장</span>
+            </div>
+            <p class="review-card__excerpt">8년차 · 컷, 베이비펌, 클리닉</p>
+            <div class="review-card__foot">
+              <span class="js-service-count">가능 시술 3개</span>
+              <button class="btn btn--ghost btn--pill js-edit-designer" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card" data-designer="정현우" data-role="디자이너" data-years="6" data-bio="6년차 · 컷, 다운펌, 애쉬 컬러" data-services="시그니처 컷,다운펌,두피 클리닉,애쉬 컬러">
+          <div class="review-card__photo" data-tone="ocean" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">정현우</h4>
+              <span class="tag">디자이너</span>
+            </div>
+            <p class="review-card__excerpt">6년차 · 컷, 다운펌, 애쉬 컬러</p>
+            <div class="review-card__foot">
+              <span class="js-service-count">가능 시술 4개</span>
+              <button class="btn btn--ghost btn--pill js-edit-designer" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card" data-designer="유서영" data-role="실장" data-years="9" data-bio="9년차 · 컷, 발레아쥬, 클리닉" data-services="시그니처 컷,발레아쥬,두피 클리닉">
+          <div class="review-card__photo" data-tone="forest" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">유서영</h4>
+              <span class="tag">실장</span>
+            </div>
+            <p class="review-card__excerpt">9년차 · 컷, 발레아쥬, 클리닉</p>
+            <div class="review-card__foot">
+              <span class="js-service-count">가능 시술 3개</span>
+              <button class="btn btn--ghost btn--pill js-edit-designer" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card" data-designer="한태리" data-role="디자이너" data-years="5" data-bio="5년차 · 발레아쥬, 베이비펌, 클리닉" data-services="발레아쥬,베이비펌,두피 클리닉">
+          <div class="review-card__photo" data-tone="cocoa" style="aspect-ratio: 4/3;"></div>
+          <div class="review-card__body">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h4 style="font-size: var(--fs-title); font-weight:600;">한태리</h4>
+              <span class="tag">디자이너</span>
+            </div>
+            <p class="review-card__excerpt">5년차 · 발레아쥬, 베이비펌, 클리닉</p>
+            <div class="review-card__foot">
+              <span class="js-service-count">가능 시술 3개</span>
+              <button class="btn btn--ghost btn--pill js-edit-designer" style="height: 32px; padding: 4px 12px;">편집</button>
+            </div>
+          </div>
+        </article>
+
       </div>
     </section>
 
   </main>
 </div>
 
+<!-- Account password re-entry modal — opens from sidebar "관리자 계정" -->
+<div class="modal-overlay" id="account-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="account-modal-title">
+  <div class="modal">
+    <button class="modal__close" type="button" aria-label="닫기" data-modal-close>×</button>
+    <h3 id="account-modal-title">본인 확인</h3>
+    <p class="modal__note" style="margin-top: 0;">관리자 계정 설정을 변경하려면 비밀번호를 다시 입력해주세요.</p>
+
+    <form id="account-form" novalidate>
+      <div class="field">
+        <label class="field__label" for="am-password">비밀번호</label>
+        <input type="password" id="am-password" autocomplete="current-password" required />
+      </div>
+
+      <div class="modal__actions" style="margin-top: 8px;">
+        <button type="button" class="btn btn--secondary" data-modal-close>취소</button>
+        <button type="submit" class="btn btn--primary">확인</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Designer edit modal — opens from any "편집" button in #designers -->
+<div class="modal-overlay" id="designer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="designer-modal-title">
+  <div class="modal" style="width: min(520px, 100%);">
+    <button class="modal__close" type="button" aria-label="닫기" data-modal-close>×</button>
+    <h3 id="designer-modal-title">디자이너 편집</h3>
+
+    <div class="field">
+      <label class="field__label">이름</label>
+      <input type="text" id="dm-name" />
+    </div>
+    <div class="field">
+      <label class="field__label">직급</label>
+      <input type="text" id="dm-role" />
+    </div>
+    <div class="field">
+      <label class="field__label">경력 (년)</label>
+      <input type="number" id="dm-years" min="0" />
+    </div>
+    <div class="field">
+      <label class="field__label">소개</label>
+      <textarea id="dm-bio" rows="2"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="field__label">가능 시술</label>
+      <div id="dm-services" style="display:grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; padding: 4px 0;"></div>
+    </div>
+
+    <div class="modal__actions" style="margin-top: 8px;">
+      <button type="button" class="btn btn--secondary" data-modal-close>취소</button>
+      <button type="button" class="btn btn--primary" id="dm-save">저장</button>
+    </div>
+  </div>
+</div>
+
 <script src="assets/js/common.js"></script>
 <script src="assets/js/nav.js"></script>
+<script>
+  // Sidebar active-state toggle — keeps the clicked category highlighted.
+  // Links flagged with data-modal-target open a modal instead and don't take the active state.
+  (function () {
+    const links = document.querySelectorAll('.admin-side a[href^="#"]');
+    if (!links.length) return;
+
+    function setActive(hash) {
+      links.forEach((a) => {
+        if (a.dataset.modalTarget) return;
+        a.classList.toggle("is-active", a.getAttribute("href") === hash);
+      });
+    }
+
+    links.forEach((a) => {
+      a.addEventListener("click", () => {
+        if (a.dataset.modalTarget) return;
+        setActive(a.getAttribute("href"));
+      });
+    });
+
+    if (location.hash) setActive(location.hash);
+  })();
+
+  // Generic modal trigger — any element with data-modal-target="<id>" opens that modal.
+  (function () {
+    const triggers = document.querySelectorAll("[data-modal-target]");
+    triggers.forEach((el) => {
+      el.addEventListener("click", (e) => {
+        const id = el.dataset.modalTarget;
+        const overlay = document.getElementById(id);
+        if (!overlay) return;
+        e.preventDefault();
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        if (window.lockBody) window.lockBody();
+        const firstInput = overlay.querySelector("input, textarea, select");
+        if (firstInput) setTimeout(() => firstInput.focus(), 0);
+      });
+    });
+
+    // Shared close behavior (× / 취소 / 배경 클릭 / Esc) for ALL overlays.
+    document.querySelectorAll(".modal-overlay").forEach((overlay) => {
+      function close() {
+        if (!overlay.classList.contains("is-open")) return;
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        if (window.unlockBody) window.unlockBody();
+      }
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) close();
+        if (e.target.closest("[data-modal-close]")) close();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
+      });
+    });
+  })();
+
+  // Account password re-entry — demo only: accepts any non-empty input and toasts.
+  (function () {
+    const form = document.getElementById("account-form");
+    const overlay = document.getElementById("account-modal");
+    const pw = document.getElementById("am-password");
+    if (!form || !overlay || !pw) return;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!pw.value.trim()) {
+        pw.focus();
+        return;
+      }
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      if (window.unlockBody) window.unlockBody();
+      if (window.toast) window.toast("확인되었습니다", { variant: "success" });
+      pw.value = "";
+    });
+  })();
+
+  // Designer edit modal — driven by data-* on each .review-card in #designers.
+  (function () {
+    const SERVICES = ["시그니처 컷", "발레아쥬", "다운펌", "베이비펌", "두피 클리닉", "애쉬 컬러"];
+    const overlay = document.getElementById("designer-modal");
+    if (!overlay) return;
+
+    const title = document.getElementById("designer-modal-title");
+    const nameInput = document.getElementById("dm-name");
+    const roleInput = document.getElementById("dm-role");
+    const yearsInput = document.getElementById("dm-years");
+    const bioInput = document.getElementById("dm-bio");
+    const servicesHost = document.getElementById("dm-services");
+    const saveBtn = document.getElementById("dm-save");
+
+    // Build service checkboxes once.
+    servicesHost.innerHTML = SERVICES.map((s, i) => `
+      <label style="display:flex; align-items:center; gap:8px; font-size: var(--fs-body-sm); cursor:pointer;">
+        <input type="checkbox" value="${s}" data-dm-service style="width:18px; height:18px;" />
+        <span>${s}</span>
+      </label>`).join("");
+
+    let currentCard = null;
+
+    function open(card) {
+      currentCard = card;
+      const name = card.dataset.designer || "";
+      const role = card.dataset.role || "";
+      const years = card.dataset.years || "";
+      const bio = card.dataset.bio || "";
+      const services = (card.dataset.services || "").split(",").map((s) => s.trim()).filter(Boolean);
+
+      title.textContent = name + " 편집";
+      nameInput.value = name;
+      roleInput.value = role;
+      yearsInput.value = years;
+      bioInput.value = bio;
+      servicesHost.querySelectorAll("input[data-dm-service]").forEach((cb) => {
+        cb.checked = services.includes(cb.value);
+      });
+
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      if (window.lockBody) window.lockBody();
+      nameInput.focus();
+    }
+
+    function close() {
+      if (!overlay.classList.contains("is-open")) return;
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      if (window.unlockBody) window.unlockBody();
+      currentCard = null;
+    }
+
+    function save() {
+      if (!currentCard) return close();
+      const name = nameInput.value.trim() || currentCard.dataset.designer;
+      const role = roleInput.value.trim();
+      const years = yearsInput.value.trim();
+      const bio = bioInput.value.trim();
+      const services = Array.from(servicesHost.querySelectorAll("input[data-dm-service]:checked")).map((cb) => cb.value);
+
+      // Persist on the card's data-* (in-memory only).
+      currentCard.dataset.designer = name;
+      currentCard.dataset.role = role;
+      currentCard.dataset.years = years;
+      currentCard.dataset.bio = bio;
+      currentCard.dataset.services = services.join(",");
+
+      // Reflect into the visible card.
+      const h4 = currentCard.querySelector("h4");
+      const tag = currentCard.querySelector(".tag");
+      const excerpt = currentCard.querySelector(".review-card__excerpt");
+      const count = currentCard.querySelector(".js-service-count");
+      if (h4) h4.textContent = name;
+      if (tag) tag.textContent = role;
+      if (excerpt) excerpt.textContent = bio;
+      if (count) count.textContent = "가능 시술 " + services.length + "개";
+
+      if (window.toast) window.toast("저장되었습니다", { variant: "success" });
+      close();
+    }
+
+    // Wire up edit buttons.
+    document.querySelectorAll("#designers .js-edit-designer").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".review-card");
+        if (card) open(card);
+      });
+    });
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) close();
+      if (e.target.closest("[data-modal-close]")) close();
+    });
+    saveBtn.addEventListener("click", save);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
+    });
+  })();
+</script>
 </body>
 </html>
