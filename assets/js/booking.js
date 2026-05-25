@@ -18,6 +18,7 @@
   (window.ServiceStore ? ServiceStore.list() : []).forEach((s) => {
     SERVICES[s.id] = {
       label: s.name,
+      priceRaw: Number(s.price) || 0,
       price: ServiceStore.formatPrice(s.price),
       desc: s.desc,
       minutes: s.minutes,
@@ -33,6 +34,8 @@
       label: `${d.name} (${d.role}·${d.years}년차)`,
       short: `${d.name} ${d.role}`,
       services: d.services || [],
+      // Per-designer price overrides; falls back to service base price.
+      servicePrices: d.servicePrices || {},
       tone: d.tone,
       photo: d.photo || null,
       initial: d.initial,
@@ -41,6 +44,15 @@
       years: d.years,
     };
   });
+
+  function priceFor(designerId, serviceId) {
+    const d = DESIGNERS[designerId];
+    const s = SERVICES[serviceId];
+    if (!s) return "";
+    const override = d && d.servicePrices ? d.servicePrices[serviceId] : null;
+    const n = (override != null && override !== "") ? Number(override) : Number(s.priceRaw);
+    return ServiceStore.formatPrice(isFinite(n) ? n : 0);
+  }
 
   // Render the designer pick row from the store. The rest of the booking
   // flow only cares about [data-pick][data-designer-id] markers.
@@ -195,13 +207,14 @@
         const photoStyle = s.photo
           ? ` style="background-image:url('${s.photo}'); background-size:cover; background-position:center;"`
           : "";
+        const priceLabel = priceFor(designerId, sid);
         return `
-          <div class="service-row" data-pick data-pick-group="service" data-service-id="${sid}" data-label="${s.label}" data-price="${s.price}">
+          <div class="service-row" data-pick data-pick-group="service" data-service-id="${sid}" data-label="${s.label}" data-price="${priceLabel}">
             <div class="service-row__photo" data-tone="${s.tone}"${photoStyle}></div>
             <div class="service-row__main">
               <div class="service-row__title">
                 <span>${s.label}</span>
-                <span class="service-row__price">${s.price}</span>
+                <span class="service-row__price">${priceLabel}</span>
               </div>
               <div class="service-row__desc">${s.desc}</div>
               <div class="service-row__time">⏱ ${durationText(s.minutes)}</div>

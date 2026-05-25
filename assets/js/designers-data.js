@@ -8,8 +8,10 @@
 (function () {
   "use strict";
 
-  // Bumped to v2 when `services` flipped from display names to ServiceStore ids.
-  const STORAGE_KEY = "rausch.designers.v2";
+  // Bumped on data-shape changes:
+  //   v2 — `services` flipped from display names to ServiceStore ids
+  //   v3 — added per-designer `servicePrices` map (higher rank = higher price)
+  const STORAGE_KEY = "rausch.designers.v3";
 
   // `tone` / `portfolioTones` stay as a silent gradient fallback so the page
   // never looks broken before any photo is uploaded. They are NOT editable
@@ -17,6 +19,23 @@
   // precedence when present.
   const TONE_OPTIONS = ["rose", "warm", "cocoa", "forest", "lilac", "ocean", "charcoal", "cream"];
   const ROLE_OPTIONS = ["대표", "부원장", "실장", "디자이너"];
+
+  // Higher rank → higher price. Used both for default-seeding the per-designer
+  // price overrides and as the auto-fill when admin newly enables a service.
+  const ROLE_MULTIPLIERS = {
+    "대표":   1.25,
+    "부원장": 1.15,
+    "실장":   1.10,
+    "디자이너": 1.00,
+  };
+
+  function defaultPriceForRole(role, basePrice) {
+    const mult = ROLE_MULTIPLIERS[role] != null ? ROLE_MULTIPLIERS[role] : 1.0;
+    const raw = Number(basePrice) * mult;
+    if (!isFinite(raw) || raw <= 0) return 0;
+    // Snap to the nearest 1,000 — KRW menus look clean at that granularity.
+    return Math.round(raw / 1000) * 1000;
+  }
 
   const PORTFOLIO_SLOTS = 6;
 
@@ -51,6 +70,8 @@
         "글로벌 컬러리스트 자격증 · IPC Korea (2016)"
       ],
       services: ["signature", "balayage", "scalp"],
+      // 대표 × 1.25 of base (signature 80k, balayage 220k, scalp 85k)
+      servicePrices: { signature: 100000, balayage: 275000, scalp: 106000 },
       tags: ["시그니처 컷", "발레아쥬"],
       portfolioTones: ["rose", "cocoa", "warm", "forest", "lilac", "cream"],
       photo: null,
@@ -83,6 +104,8 @@
         "Mucota Japan · 다운펌 케미컬 코스 (2019)"
       ],
       services: ["signature", "downperm", "mens", "scalp"],
+      // 부원장 × 1.15 (signature 80k, downperm 95k, mens 38k, scalp 85k)
+      servicePrices: { signature: 92000, downperm: 109000, mens: 44000, scalp: 98000 },
       tags: ["다운펌", "남자컷"],
       portfolioTones: ["warm", "cocoa", "charcoal", "forest", "ocean", "cream"],
       photo: null,
@@ -115,6 +138,8 @@
         "쟈끄데샹쥬 아카데미 · 베이비펌 심화 과정 (2019)"
       ],
       services: ["signature", "babyperm", "scalp"],
+      // 실장 × 1.10 (signature 80k, babyperm 110k, scalp 85k)
+      servicePrices: { signature: 88000, babyperm: 121000, scalp: 94000 },
       tags: ["베이비펌", "시스루"],
       portfolioTones: ["cocoa", "lilac", "rose", "cream", "warm", "forest"],
       photo: null,
@@ -147,6 +172,8 @@
         "L'Oréal Korea · 톤 다운 컬러 마스터 코스 (2022)"
       ],
       services: ["signature", "downperm", "ash", "scalp"],
+      // 디자이너 × 1.00 (base)
+      servicePrices: { signature: 80000, downperm: 95000, ash: 180000, scalp: 85000 },
       tags: ["애쉬 컬러", "댄디컷"],
       portfolioTones: ["lilac", "ocean", "charcoal", "forest", "cocoa", "warm"],
       photo: null,
@@ -179,6 +206,8 @@
         "L'Oréal Professionnel · 발레아쥬 코스 (2020)"
       ],
       services: ["signature", "balayage", "layered", "scalp"],
+      // 실장 × 1.10 (signature 80k, balayage 220k, layered 65k, scalp 85k)
+      servicePrices: { signature: 88000, balayage: 242000, layered: 72000, scalp: 94000 },
       tags: ["레이어드 컷", "시그니처 컷"],
       portfolioTones: ["ocean", "forest", "cream", "warm", "rose", "cocoa"],
       photo: null,
@@ -211,6 +240,8 @@
         "Wella Color Touch · 매뉴얼 코스 (2022)"
       ],
       services: ["balayage", "babyperm", "ombre", "scalp"],
+      // 디자이너 × 1.00 (base)
+      servicePrices: { balayage: 220000, babyperm: 110000, ombre: 160000, scalp: 85000 },
       tags: ["발레아쥬", "옴브레"],
       portfolioTones: ["forest", "warm", "rose", "cocoa", "ocean", "cream"],
       photo: null,
@@ -241,6 +272,8 @@
         "Mucota · 펌·트리트먼트 코스 (2023)"
       ],
       services: ["babyperm", "ash", "scalp"],
+      // 디자이너 × 1.00 (base)
+      servicePrices: { babyperm: 110000, ash: 180000, scalp: 85000 },
       tags: ["베이비펌", "애쉬 컬러"],
       portfolioTones: ["cream", "rose", "lilac", "warm", "cocoa", "ocean"],
       photo: null,
@@ -271,6 +304,8 @@
         "Toni & Guy · Men's Classic Cut 과정 (2022)"
       ],
       services: ["mens", "dandy", "downperm"],
+      // 디자이너 × 1.00 (base)
+      servicePrices: { mens: 38000, dandy: 42000, downperm: 95000 },
       tags: ["남자컷", "댄디컷"],
       portfolioTones: ["charcoal", "ocean", "cocoa", "forest", "warm", "cream"],
       photo: null,
@@ -346,7 +381,9 @@
   const DesignerStore = {
     TONE_OPTIONS,
     ROLE_OPTIONS,
+    ROLE_MULTIPLIERS,
     PORTFOLIO_SLOTS,
+    defaultPriceForRole,
 
     list() {
       return mergeOverrides(deepClone(DEFAULT_DESIGNERS));
