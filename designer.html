@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>김다현 대표 — Salon Rausch</title>
+<title>디자이너 — Salon Rausch</title>
 <link rel="stylesheet" href="assets/css/tokens.css" />
 <link rel="stylesheet" href="assets/css/base.css" />
 <link rel="stylesheet" href="assets/css/nav.css" />
@@ -59,93 +59,7 @@
       <a href="designers.html" style="text-decoration: underline;">← 디자이너 전체</a>
     </p>
 
-    <div class="detail-hero">
-      <div class="detail-hero__photo">
-        <span class="designer-card__initial">다</span>
-      </div>
-      <div>
-        <span class="eyebrow">대표 디자이너</span>
-        <h1>김다현 <span style="font-size:18px; color: var(--color-muted); font-weight:500;">Dahyun Kim</span></h1>
-        <div class="detail-hero__role">시그니처 컷 · 발레아쥬 전문 · 16년차</div>
-
-        <div class="detail-hero__stats">
-          <div class="stat-block"><strong>16년</strong><span>경력</span></div>
-          <div class="stat-block"><strong>★ 4.97</strong><span>후기 평점</span></div>
-          <div class="stat-block"><strong>342</strong><span>후기 수</span></div>
-        </div>
-
-        <div class="detail-hero__cta">
-          <a href="booking.html" class="btn btn--primary">이 디자이너에게 예약</a>
-          <a href="reviews.html?designer=dahyun" class="btn btn--secondary">디자이너 후기 보기</a>
-        </div>
-      </div>
-    </div>
-
-    <section class="profile-section">
-      <h3>소개</h3>
-      <p>
-        시술 전 두상과 머릿결, 그리고 자신의 라이프스타일을 충분히 듣고 시작합니다.
-        화려한 변화보다 매일 아침 손질이 쉬워지는 시술을 선호합니다.
-        프랑스 발레아쥬 기법을 한국인의 두상에 맞춰 변형한 시그니처 컷이 대표 작품입니다.
-      </p>
-    </section>
-
-    <section class="profile-section">
-      <h3>전문 시술 분야</h3>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <span class="tag tag--ink">시그니처 컷</span>
-        <span class="tag">발레아쥬</span>
-        <span class="tag">레이어드 컷</span>
-        <span class="tag">옴브레</span>
-        <span class="tag">로우 라이트</span>
-        <span class="tag">두피 클리닉</span>
-      </div>
-    </section>
-
-    <section class="profile-section">
-      <h3>경력</h3>
-      <ul>
-        <li>· Salon Rausch · 대표 디자이너 (2018 – 현재)</li>
-        <li>· Hair by Mood · 부원장 (2015 – 2018)</li>
-        <li>· Chahong Ardor 청담 본점 · 디자이너 (2012 – 2015)</li>
-        <li>· Park Jun Beauty Lab · 인턴 → 스타일리스트 (2008 – 2012)</li>
-      </ul>
-    </section>
-
-    <section class="profile-section">
-      <h3>교육 · 강사 이력</h3>
-      <ul>
-        <li>· L'Oréal Professionnel Paris · 발레아쥬 마스터 코스 수료 (2019)</li>
-        <li>· Vidal Sassoon London · ABC Cutting & Coloring 수료 (2017)</li>
-        <li>· KOSCO 한국직업능력개발원 · 헤어 디자인 전임 강사 (2020 – 현재)</li>
-        <li>· 글로벌 컬러리스트 자격증 · IPC Korea (2016)</li>
-      </ul>
-    </section>
-
-    <section class="profile-section">
-      <h3>대표 작품</h3>
-      <div class="portfolio-grid">
-        <div data-tone="rose"></div>
-        <div data-tone="cocoa"></div>
-        <div data-tone="warm"></div>
-        <div data-tone="forest"></div>
-        <div data-tone="lilac"></div>
-        <div data-tone="cream"></div>
-      </div>
-    </section>
-
-    <section class="profile-section" style="border-bottom: none;">
-      <div class="kakao-card" style="margin-top: 16px; background: var(--color-surface-soft);">
-        <div class="kakao-icon">예</div>
-        <div>
-          <h3 style="font-size: var(--fs-display-md); font-weight:700;">지금 김다현 대표 예약하기</h3>
-          <p class="muted" style="font-size: var(--fs-body-sm); margin-top:4px;">
-            카카오톡 한 번이면 예약 끝. 예약 하루 전 자동 리마인더를 보내드려요.
-          </p>
-        </div>
-        <a href="booking.html" class="btn btn--primary">예약하기 →</a>
-      </div>
-    </section>
+    <div id="designer-detail"></div>
 
   </section>
 </main>
@@ -167,5 +81,128 @@
 <script src="assets/js/common.js"></script>
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/wishlist.js"></script>
+<script src="assets/js/designers-data.js"></script>
+<script>
+  (function () {
+    const host = document.getElementById("designer-detail");
+    if (!host || !window.DesignerStore) return;
+
+    function escapeHtml(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function param(name) {
+      const m = new URLSearchParams(location.search).get(name);
+      return m ? m.trim() : "";
+    }
+
+    function pickDesigner() {
+      const id = param("id");
+      if (id) {
+        const d = DesignerStore.get(id);
+        if (d) return d;
+      }
+      return DesignerStore.list()[0];
+    }
+
+    function render(d) {
+      const tags = (d.specialties || []).map((s, i) =>
+        `<span class="tag${i === 0 ? " tag--ink" : ""}">${escapeHtml(s)}</span>`
+      ).join("");
+
+      const careerList = (d.career || []).map((c) => `<li>· ${escapeHtml(c)}</li>`).join("");
+      const eduList = (d.education || []).map((c) => `<li>· ${escapeHtml(c)}</li>`).join("");
+
+      const portfolioPhotos = d.portfolioPhotos || [];
+      const portfolioTones = d.portfolioTones || [];
+      const portfolio = Array.from({ length: 6 }, (_, i) => {
+        const photo = portfolioPhotos[i];
+        const tone = portfolioTones[i] || "rose";
+        if (photo) {
+          return `<div class="has-photo" style="background-image:url('${escapeHtml(photo)}'); background-size:cover; background-position:center;"></div>`;
+        }
+        return `<div data-tone="${escapeHtml(tone)}"></div>`;
+      }).join("");
+
+      const heroPhotoStyle = d.photo
+        ? `background-image:url('${escapeHtml(d.photo)}'); background-size:cover; background-position:center;`
+        : "";
+      const heroInitial = d.photo
+        ? ""
+        : `<span class="designer-card__initial">${escapeHtml(d.initial)}</span>`;
+
+      document.title = `${d.name}${d.isPrincipal ? " 대표" : ""} — Salon Rausch`;
+
+      host.innerHTML = `
+        <div class="detail-hero">
+          <div class="detail-hero__photo"${d.photo ? "" : ` data-tone="${escapeHtml(d.tone)}"`} style="${heroPhotoStyle}">
+            ${heroInitial}
+          </div>
+          <div>
+            <span class="eyebrow">${escapeHtml(d.eyebrow || d.role || "")}</span>
+            <h1>${escapeHtml(d.name)} <span style="font-size:18px; color: var(--color-muted); font-weight:500;">${escapeHtml(d.nameEn || "")}</span></h1>
+            <div class="detail-hero__role">${escapeHtml(d.roleSubtitle || "")}</div>
+
+            <div class="detail-hero__stats">
+              <div class="stat-block"><strong>${escapeHtml((d.years ?? "") + "년")}</strong><span>경력</span></div>
+              <div class="stat-block"><strong>★ ${escapeHtml(Number(d.rating).toFixed(2))}</strong><span>후기 평점</span></div>
+              <div class="stat-block"><strong>${escapeHtml(d.reviewCount ?? 0)}</strong><span>후기 수</span></div>
+            </div>
+
+            <div class="detail-hero__cta">
+              <a href="booking.html?designer=${encodeURIComponent(d.id)}" class="btn btn--primary">이 디자이너에게 예약</a>
+              <a href="reviews.html?designer=${encodeURIComponent(d.id)}" class="btn btn--secondary">디자이너 후기 보기</a>
+            </div>
+          </div>
+        </div>
+
+        <section class="profile-section">
+          <h3>소개</h3>
+          <p>${escapeHtml(d.intro || "")}</p>
+        </section>
+
+        <section class="profile-section">
+          <h3>전문 시술 분야</h3>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">${tags}</div>
+        </section>
+
+        <section class="profile-section">
+          <h3>경력</h3>
+          <ul>${careerList}</ul>
+        </section>
+
+        <section class="profile-section">
+          <h3>교육 · 강사 이력</h3>
+          <ul>${eduList}</ul>
+        </section>
+
+        <section class="profile-section">
+          <h3>대표 작품</h3>
+          <div class="portfolio-grid">${portfolio}</div>
+        </section>
+
+        <section class="profile-section" style="border-bottom: none;">
+          <div class="kakao-card" style="margin-top: 16px; background: var(--color-surface-soft);">
+            <div class="kakao-icon">예</div>
+            <div>
+              <h3 style="font-size: var(--fs-display-md); font-weight:700;">지금 ${escapeHtml(d.name)}${d.isPrincipal ? " 대표" : ""} 예약하기</h3>
+              <p class="muted" style="font-size: var(--fs-body-sm); margin-top:4px;">
+                카카오톡 한 번이면 예약 끝. 예약 하루 전 자동 리마인더를 보내드려요.
+              </p>
+            </div>
+            <a href="booking.html?designer=${encodeURIComponent(d.id)}" class="btn btn--primary">예약하기 →</a>
+          </div>
+        </section>
+      `;
+    }
+
+    render(pickDesigner());
+  })();
+</script>
 </body>
 </html>

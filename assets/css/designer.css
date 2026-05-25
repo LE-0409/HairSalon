@@ -12,9 +12,13 @@
 .detail-hero__photo {
   aspect-ratio: 1 / 1;
   border-radius: var(--r-lg);
-  background: linear-gradient(135deg,#ffd9e1,#ff8aa3);
   position: relative;
   overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.detail-hero__photo:not([data-tone]) {
+  background: linear-gradient(135deg,#ffd9e1,#ff8aa3);
 }
 .detail-hero__photo .designer-card__initial { font-size: 96px; }
 .detail-hero h1 {
