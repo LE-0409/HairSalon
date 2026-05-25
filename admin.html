@@ -154,104 +154,12 @@
       <div class="admin-section-head">
         <div>
           <h1>시술 메뉴</h1>
-          <p class="lede">매장 시술 가격과 설명을 관리합니다. 시드 메뉴로 커트·펌·염색·클리닉이 기본 제공됩니다.</p>
+          <p class="lede">매장 시술 가격과 설명을 관리합니다. 편집한 내용은 예약 페이지의 시술 선택에 즉시 반영됩니다.</p>
         </div>
-        <button class="btn btn--primary">+ 시술 추가</button>
+        <button class="btn btn--secondary" id="sm-reset" type="button">기본값으로 되돌리기</button>
       </div>
 
-      <div class="grid-cards grid-cards--3">
-
-        <article class="review-card">
-          <div class="review-card__photo" data-tone="rose" style="aspect-ratio: 4/3;"></div>
-          <div class="review-card__body">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <h4 style="font-size: var(--fs-title); font-weight:600;">시그니처 컷</h4>
-              <strong>₩ 80,000</strong>
-            </div>
-            <p class="review-card__excerpt">두상·머릿결·라이프스타일 1:1 진단 후 시술. (60분)</p>
-            <div class="review-card__foot">
-              <span>가능 디자이너 6명</span>
-              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-card__photo" data-tone="warm" style="aspect-ratio: 4/3;"></div>
-          <div class="review-card__body">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <h4 style="font-size: var(--fs-title); font-weight:600;">발레아쥬 (염색)</h4>
-              <strong>₩ 220,000</strong>
-            </div>
-            <p class="review-card__excerpt">자연스러운 그라데이션, 햇빛에 색이 살아남. (180분)</p>
-            <div class="review-card__foot">
-              <span>가능 디자이너 3명</span>
-              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-card__photo" data-tone="cocoa" style="aspect-ratio: 4/3;"></div>
-          <div class="review-card__body">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <h4 style="font-size: var(--fs-title); font-weight:600;">남자 다운펌</h4>
-              <strong>₩ 95,000</strong>
-            </div>
-            <p class="review-card__excerpt">자고 일어나도 망가지지 않는 자연스런 결. (90분)</p>
-            <div class="review-card__foot">
-              <span>가능 디자이너 4명</span>
-              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-card__photo" data-tone="lilac" style="aspect-ratio: 4/3;"></div>
-          <div class="review-card__body">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <h4 style="font-size: var(--fs-title); font-weight:600;">베이비펌</h4>
-              <strong>₩ 110,000</strong>
-            </div>
-            <p class="review-card__excerpt">자연스러운 C컬, 손상 최소화 처방. (120분)</p>
-            <div class="review-card__foot">
-              <span>가능 디자이너 5명</span>
-              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-card__photo" data-tone="forest" style="aspect-ratio: 4/3;"></div>
-          <div class="review-card__body">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <h4 style="font-size: var(--fs-title); font-weight:600;">두피 클리닉</h4>
-              <strong>₩ 85,000</strong>
-            </div>
-            <p class="review-card__excerpt">두피 진단 후 맞춤 케어. 시술과 함께 권장. (40분)</p>
-            <div class="review-card__foot">
-              <span>가능 디자이너 8명 (전체)</span>
-              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="review-card__photo" data-tone="ocean" style="aspect-ratio: 4/3;"></div>
-          <div class="review-card__body">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <h4 style="font-size: var(--fs-title); font-weight:600;">애쉬 컬러</h4>
-              <strong>₩ 180,000</strong>
-            </div>
-            <p class="review-card__excerpt">노란기 없는 깔끔한 회갈색 톤. (150분)</p>
-            <div class="review-card__foot">
-              <span>가능 디자이너 2명</span>
-              <button class="btn btn--ghost btn--pill" style="height: 32px; padding: 4px 12px;">편집</button>
-            </div>
-          </div>
-        </article>
-
-      </div>
+      <div class="grid-cards grid-cards--3" id="service-admin-grid"></div>
     </section>
 
     <section id="designers" style="margin-top: 64px;">
@@ -407,6 +315,49 @@
   </div>
 </div>
 
+<!-- Service edit modal — opens from any "편집" button in #services -->
+<div class="modal-overlay" id="service-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+  <div class="modal" style="width: min(560px, 100%); max-height: 90vh; overflow-y: auto;">
+    <button class="modal__close" type="button" aria-label="닫기" data-modal-close>×</button>
+    <h3 id="service-modal-title">시술 편집</h3>
+
+    <div class="field">
+      <label class="field__label" for="sm-name">시술명</label>
+      <input type="text" id="sm-name" />
+    </div>
+    <div class="dm-row">
+      <div class="field">
+        <label class="field__label" for="sm-price">가격 (원)</label>
+        <input type="number" id="sm-price" min="0" step="1000" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="sm-minutes">소요 시간</label>
+        <select id="sm-minutes"></select>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field__label" for="sm-desc">설명</label>
+      <textarea id="sm-desc" rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="field__label">시술 이미지</label>
+      <div class="photo-slot photo-slot--lg" id="sm-photo-slot">
+        <div class="photo-slot__preview" data-photo-preview></div>
+        <input type="file" accept="image/*" id="sm-photo-input" hidden />
+        <div class="photo-slot__actions">
+          <button type="button" class="btn btn--secondary btn--pill photo-slot__pick">이미지 선택</button>
+          <button type="button" class="btn btn--ghost btn--pill photo-slot__clear" hidden>삭제</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal__actions" style="margin-top: 8px;">
+      <button type="button" class="btn btn--secondary" data-modal-close>취소</button>
+      <button type="button" class="btn btn--primary" id="sm-save">저장</button>
+    </div>
+  </div>
+</div>
+
 <style>
   .dm-section {
     font-size: var(--fs-caption);
@@ -484,6 +435,7 @@
 <script src="assets/js/common.js"></script>
 <script src="assets/js/nav.js"></script>
 <script src="assets/js/designers-data.js"></script>
+<script src="assets/js/services-data.js"></script>
 <script>
   // Sidebar active-state toggle — keeps the clicked category highlighted.
   // Links flagged with data-modal-target open a modal instead and don't take the active state.
@@ -612,14 +564,20 @@
         .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
     }
 
-    // Populate static dropdowns + service checkboxes once.
+    // Populate static dropdowns once. Service checkboxes are rebuilt every
+    // time the modal opens, since ServiceStore can change between edits.
     fields.role.innerHTML = DesignerStore.ROLE_OPTIONS
       .map((r) => `<option value="${escapeHtml(r)}">${escapeHtml(r)}</option>`).join("");
-    servicesHost.innerHTML = DesignerStore.SERVICE_OPTIONS.map((s) => `
-      <label style="display:flex; align-items:center; gap:8px; font-size: var(--fs-body-sm); cursor:pointer;">
-        <input type="checkbox" value="${escapeHtml(s)}" data-dm-service style="width:18px; height:18px;" />
-        <span>${escapeHtml(s)}</span>
-      </label>`).join("");
+
+    function renderServiceCheckboxes(selectedIds) {
+      const services = (window.ServiceStore ? ServiceStore.list() : []);
+      const selected = new Set(selectedIds || []);
+      servicesHost.innerHTML = services.map((s) => `
+        <label style="display:flex; align-items:center; gap:8px; font-size: var(--fs-body-sm); cursor:pointer;">
+          <input type="checkbox" value="${escapeHtml(s.id)}" data-dm-service style="width:18px; height:18px;" ${selected.has(s.id) ? "checked" : ""} />
+          <span>${escapeHtml(s.name)}</span>
+        </label>`).join("");
+    }
 
     function renderPhotoPreview() {
       if (currentPhoto) {
@@ -762,10 +720,7 @@
       renderPhotoPreview();
       renderPortfolioSlots();
 
-      const services = d.services || [];
-      servicesHost.querySelectorAll("input[data-dm-service]").forEach((cb) => {
-        cb.checked = services.includes(cb.value);
-      });
+      renderServiceCheckboxes(d.services || []);
 
       overlay.classList.add("is-open");
       overlay.setAttribute("aria-hidden", "false");
@@ -831,6 +786,9 @@
         return;
       }
       renderGrid();
+      // Service "가능 디자이너 N명" depends on designer.services — let the
+      // services panel refresh its counts.
+      document.dispatchEvent(new Event("rausch:designers-changed"));
       if (window.toast) window.toast("저장되었습니다 — 사이트에 반영됩니다", { variant: "success" });
       close();
     }
@@ -858,9 +816,200 @@
         if (!confirm("모든 디자이너 정보를 기본값으로 되돌릴까요? 저장한 편집 내용이 사라집니다.")) return;
         DesignerStore.reset();
         renderGrid();
+        document.dispatchEvent(new Event("rausch:designers-changed"));
         if (window.toast) window.toast("기본값으로 되돌렸습니다", { variant: "default" });
       });
     }
+  })();
+
+  // Service admin — render service cards and drive the service edit modal.
+  (function () {
+    if (!window.ServiceStore || !window.DesignerStore) return;
+    const grid = document.getElementById("service-admin-grid");
+    const overlay = document.getElementById("service-modal");
+    if (!grid || !overlay) return;
+
+    const $ = (id) => document.getElementById(id);
+    const title = $("service-modal-title");
+    const fields = {
+      name: $("sm-name"),
+      price: $("sm-price"),
+      minutes: $("sm-minutes"),
+      desc: $("sm-desc"),
+    };
+    const saveBtn = $("sm-save");
+    const resetBtn = $("sm-reset");
+
+    let currentId = null;
+    let currentPhoto = null;
+
+    const photoSlot = $("sm-photo-slot");
+    const photoPreview = photoSlot.querySelector("[data-photo-preview]");
+    const photoInput = $("sm-photo-input");
+    const photoPickBtn = photoSlot.querySelector(".photo-slot__pick");
+    const photoClearBtn = photoSlot.querySelector(".photo-slot__clear");
+
+    function escapeHtml(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    fields.minutes.innerHTML = ServiceStore.DURATION_OPTIONS
+      .map((m) => `<option value="${m}">${m}분</option>`).join("");
+
+    function designerCountForService(id) {
+      const designers = DesignerStore.list();
+      const total = designers.length;
+      const n = designers.filter((d) => (d.services || []).includes(id)).length;
+      return n === total ? `가능 디자이너 ${n}명 (전체)` : `가능 디자이너 ${n}명`;
+    }
+
+    function renderGrid() {
+      const services = ServiceStore.list();
+      grid.innerHTML = services.map((s) => {
+        const photoStyle = s.photo
+          ? `aspect-ratio: 4/3; background-image:url('${escapeHtml(s.photo)}'); background-size:cover; background-position:center;`
+          : "aspect-ratio: 4/3;";
+        return `
+          <article class="review-card" data-service-id="${escapeHtml(s.id)}">
+            <div class="review-card__photo" data-tone="${escapeHtml(s.tone)}" style="${photoStyle}"></div>
+            <div class="review-card__body">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                <h4 style="font-size: var(--fs-title); font-weight:600;">${escapeHtml(s.name)}</h4>
+                <strong>${escapeHtml(ServiceStore.formatPrice(s.price))}</strong>
+              </div>
+              <p class="review-card__excerpt">${escapeHtml(s.desc || "")} (${s.minutes}분)</p>
+              <div class="review-card__foot">
+                <span>${escapeHtml(designerCountForService(s.id))}</span>
+                <button class="btn btn--ghost btn--pill js-edit-service" type="button" data-id="${escapeHtml(s.id)}" style="height: 32px; padding: 4px 12px;">편집</button>
+              </div>
+            </div>
+          </article>`;
+      }).join("");
+    }
+
+    function renderPhotoPreview() {
+      if (currentPhoto) {
+        photoPreview.style.backgroundImage = `url('${currentPhoto}')`;
+        photoPreview.classList.remove("is-empty");
+        photoClearBtn.hidden = false;
+      } else {
+        photoPreview.style.backgroundImage = "";
+        photoPreview.classList.add("is-empty");
+        photoClearBtn.hidden = true;
+      }
+    }
+
+    photoPickBtn.addEventListener("click", () => photoInput.click());
+    photoInput.addEventListener("change", async () => {
+      const file = photoInput.files && photoInput.files[0];
+      if (!file) return;
+      try {
+        currentPhoto = await ServiceStore.compressImage(file, { maxEdge: 800, quality: 0.82 });
+        renderPhotoPreview();
+      } catch (e) {
+        if (window.toast) window.toast(e.message || "이미지를 읽지 못했어요", { variant: "error" });
+      } finally {
+        photoInput.value = "";
+      }
+    });
+    photoClearBtn.addEventListener("click", () => {
+      currentPhoto = null;
+      renderPhotoPreview();
+    });
+
+    function open(id) {
+      const s = ServiceStore.get(id);
+      if (!s) return;
+      currentId = id;
+      title.textContent = s.name + " 편집";
+      fields.name.value = s.name || "";
+      fields.price.value = s.price ?? 0;
+      // If the saved duration isn't in the dropdown's preset list, add it ad-hoc
+      // rather than silently snapping to the default.
+      if (!ServiceStore.DURATION_OPTIONS.includes(Number(s.minutes))) {
+        const opt = document.createElement("option");
+        opt.value = s.minutes;
+        opt.textContent = s.minutes + "분";
+        fields.minutes.appendChild(opt);
+      }
+      fields.minutes.value = String(s.minutes ?? 60);
+      fields.desc.value = s.desc || "";
+      currentPhoto = s.photo || null;
+      renderPhotoPreview();
+
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      if (window.lockBody) window.lockBody();
+      setTimeout(() => fields.name.focus(), 0);
+    }
+
+    function close() {
+      if (!overlay.classList.contains("is-open")) return;
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      if (window.unlockBody) window.unlockBody();
+      currentId = null;
+    }
+
+    function save() {
+      if (!currentId) return close();
+      const patch = {
+        name: fields.name.value.trim(),
+        price: Math.max(0, Number(fields.price.value) || 0),
+        minutes: Math.max(15, Number(fields.minutes.value) || 60),
+        desc: fields.desc.value.trim(),
+        photo: currentPhoto || null,
+      };
+      try {
+        ServiceStore.save(currentId, patch);
+      } catch (e) {
+        if (window.toast) {
+          window.toast(
+            e && e.name === "QuotaExceededError"
+              ? "저장 용량을 초과했어요. 이미지를 줄여서 다시 시도해 주세요."
+              : "저장에 실패했어요: " + (e.message || e),
+            { variant: "error", duration: 4000 }
+          );
+        }
+        return;
+      }
+      renderGrid();
+      document.dispatchEvent(new Event("rausch:services-changed"));
+      if (window.toast) window.toast("저장되었습니다 — 예약 페이지에 반영됩니다", { variant: "success" });
+      close();
+    }
+
+    renderGrid();
+    grid.addEventListener("click", (e) => {
+      const btn = e.target.closest(".js-edit-service");
+      if (!btn) return;
+      const id = btn.dataset.id;
+      if (id) open(id);
+    });
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) close();
+      if (e.target.closest("[data-modal-close]")) close();
+    });
+    saveBtn.addEventListener("click", save);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) close();
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        if (!confirm("모든 시술 메뉴를 기본값으로 되돌릴까요? 저장한 편집 내용이 사라집니다.")) return;
+        ServiceStore.reset();
+        renderGrid();
+        document.dispatchEvent(new Event("rausch:services-changed"));
+        if (window.toast) window.toast("기본값으로 되돌렸습니다", { variant: "default" });
+      });
+    }
+
+    // Refresh counts when designers change (their .services list affects us).
+    document.addEventListener("rausch:designers-changed", renderGrid);
   })();
 </script>
 </body>

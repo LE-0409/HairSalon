@@ -8,7 +8,8 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "rausch.designers.v1";
+  // Bumped to v2 when `services` flipped from display names to ServiceStore ids.
+  const STORAGE_KEY = "rausch.designers.v2";
 
   // `tone` / `portfolioTones` stay as a silent gradient fallback so the page
   // never looks broken before any photo is uploaded. They are NOT editable
@@ -16,7 +17,6 @@
   // precedence when present.
   const TONE_OPTIONS = ["rose", "warm", "cocoa", "forest", "lilac", "ocean", "charcoal", "cream"];
   const ROLE_OPTIONS = ["대표", "부원장", "실장", "디자이너"];
-  const SERVICE_OPTIONS = ["시그니처 컷", "발레아쥬", "다운펌", "베이비펌", "두피 클리닉", "애쉬 컬러", "레이어드 컷", "옴브레", "남자컷", "댄디컷"];
 
   const PORTFOLIO_SLOTS = 6;
 
@@ -50,7 +50,7 @@
         "KOSCO 한국직업능력개발원 · 헤어 디자인 전임 강사 (2020 – 현재)",
         "글로벌 컬러리스트 자격증 · IPC Korea (2016)"
       ],
-      services: ["시그니처 컷", "발레아쥬", "두피 클리닉"],
+      services: ["signature", "balayage", "scalp"],
       tags: ["시그니처 컷", "발레아쥬"],
       portfolioTones: ["rose", "cocoa", "warm", "forest", "lilac", "cream"],
       photo: null,
@@ -82,7 +82,7 @@
         "Toni & Guy 본사 · Men's Cutting 마스터 클래스 (2021)",
         "Mucota Japan · 다운펌 케미컬 코스 (2019)"
       ],
-      services: ["시그니처 컷", "다운펌", "두피 클리닉"],
+      services: ["signature", "downperm", "mens", "scalp"],
       tags: ["다운펌", "남자컷"],
       portfolioTones: ["warm", "cocoa", "charcoal", "forest", "ocean", "cream"],
       photo: null,
@@ -114,7 +114,7 @@
         "Wella Professionals · 펌 케미스트리 코스 (2020)",
         "쟈끄데샹쥬 아카데미 · 베이비펌 심화 과정 (2019)"
       ],
-      services: ["시그니처 컷", "베이비펌", "두피 클리닉"],
+      services: ["signature", "babyperm", "scalp"],
       tags: ["베이비펌", "시스루"],
       portfolioTones: ["cocoa", "lilac", "rose", "cream", "warm", "forest"],
       photo: null,
@@ -146,7 +146,7 @@
         "Goldwell Color Zoom · 어드밴스드 컬러 (2023)",
         "L'Oréal Korea · 톤 다운 컬러 마스터 코스 (2022)"
       ],
-      services: ["시그니처 컷", "다운펌", "두피 클리닉", "애쉬 컬러"],
+      services: ["signature", "downperm", "ash", "scalp"],
       tags: ["애쉬 컬러", "댄디컷"],
       portfolioTones: ["lilac", "ocean", "charcoal", "forest", "cocoa", "warm"],
       photo: null,
@@ -178,7 +178,7 @@
         "Vidal Sassoon London · Layered Cut 마스터 (2022)",
         "L'Oréal Professionnel · 발레아쥬 코스 (2020)"
       ],
-      services: ["시그니처 컷", "발레아쥬", "두피 클리닉"],
+      services: ["signature", "balayage", "layered", "scalp"],
       tags: ["레이어드 컷", "시그니처 컷"],
       portfolioTones: ["ocean", "forest", "cream", "warm", "rose", "cocoa"],
       photo: null,
@@ -210,7 +210,7 @@
         "Schwarzkopf BlondMe · 발레아쥬 어드밴스 (2023)",
         "Wella Color Touch · 매뉴얼 코스 (2022)"
       ],
-      services: ["발레아쥬", "베이비펌", "두피 클리닉"],
+      services: ["balayage", "babyperm", "ombre", "scalp"],
       tags: ["발레아쥬", "옴브레"],
       portfolioTones: ["forest", "warm", "rose", "cocoa", "ocean", "cream"],
       photo: null,
@@ -240,7 +240,7 @@
       education: [
         "Mucota · 펌·트리트먼트 코스 (2023)"
       ],
-      services: ["베이비펌", "애쉬 컬러"],
+      services: ["babyperm", "ash", "scalp"],
       tags: ["베이비펌", "애쉬 컬러"],
       portfolioTones: ["cream", "rose", "lilac", "warm", "cocoa", "ocean"],
       photo: null,
@@ -270,7 +270,7 @@
       education: [
         "Toni & Guy · Men's Classic Cut 과정 (2022)"
       ],
-      services: ["남자컷", "댄디컷", "다운펌"],
+      services: ["mens", "dandy", "downperm"],
       tags: ["남자컷", "댄디컷"],
       portfolioTones: ["charcoal", "ocean", "cocoa", "forest", "warm", "cream"],
       photo: null,
@@ -346,7 +346,6 @@
   const DesignerStore = {
     TONE_OPTIONS,
     ROLE_OPTIONS,
-    SERVICE_OPTIONS,
     PORTFOLIO_SLOTS,
 
     list() {

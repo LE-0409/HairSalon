@@ -11,33 +11,58 @@
 (function () {
   "use strict";
 
-  /* ---------- Catalog (would come from API in full-stack stage) ----------
-     `minutes` is always one of {30, 60, 120, 180} so it lines up with
-     the 30-min time-slot grid below. */
-  const SERVICES = {
-    signature: { label: "시그니처 컷",    price: "₩ 80,000",  desc: "두상·머릿결·라이프스타일을 1:1로 진단하고 직접 컷합니다.", minutes: 60,  tone: "rose" },
-    balayage:  { label: "발레아쥬 (염색)", price: "₩ 220,000", desc: "자연스러운 그라데이션. 햇빛에 색이 살아나는 시그니처 컬러.", minutes: 180, tone: "warm" },
-    layered:   { label: "레이어드 컷",    price: "₩ 65,000",  desc: "긴 머리 가볍게, 짧은 머리에 입체감을. 결대로 정리합니다.", minutes: 30,  tone: "lilac" },
-    scalp:     { label: "두피 클리닉",    price: "₩ 85,000",  desc: "두피 진단 후 맞춤 케어. 시술과 함께 받으시면 더 효과적이에요.", minutes: 30,  tone: "forest" },
-    downperm:  { label: "남자 다운펌",    price: "₩ 95,000",  desc: "자고 일어나도 망가지지 않는 결대로의 펌.",            minutes: 120, tone: "cocoa" },
-    babyperm:  { label: "베이비펌",      price: "₩ 110,000", desc: "자연스러운 C컬, 손상 최소화 처방.",                  minutes: 120, tone: "lilac" },
-    ash:       { label: "애쉬 컬러",     price: "₩ 180,000", desc: "노란기 없는 깔끔한 회갈색 톤.",                       minutes: 180, tone: "ocean" },
-    ombre:     { label: "옴브레",        price: "₩ 160,000", desc: "탈색 자국 없는 자연스런 그라데이션.",                 minutes: 180, tone: "warm" },
-    mens:      { label: "남자컷",        price: "₩ 38,000",  desc: "댄디·투블럭 등 결대로 깔끔하게 다듬어드립니다.",       minutes: 30,  tone: "charcoal" },
-    dandy:     { label: "댄디컷",        price: "₩ 42,000",  desc: "부드럽게 흐르는 라인의 클래식 남자 스타일.",          minutes: 30,  tone: "charcoal" },
-  };
+  /* ---------- Catalog ----------
+     Built from ServiceStore / DesignerStore so admin edits flow through.
+     `minutes` is in multiples of 30 to line up with the time-slot grid. */
+  const SERVICES = {};
+  (window.ServiceStore ? ServiceStore.list() : []).forEach((s) => {
+    SERVICES[s.id] = {
+      label: s.name,
+      price: ServiceStore.formatPrice(s.price),
+      desc: s.desc,
+      minutes: s.minutes,
+      tone: s.tone,
+      photo: s.photo || null,
+    };
+  });
   const durationText = (m) => `약 ${m}분`;
 
-  const DESIGNERS = {
-    dahyun:  { label: "김다현 (대표·16년차)",   short: "김다현 대표",   services: ["signature", "balayage", "layered", "scalp"] },
-    sooa:    { label: "박수아 (부원장·11년차)", short: "박수아 부원장", services: ["signature", "downperm", "mens", "scalp"] },
-    minji:   { label: "이민지 (실장·8년차)",   short: "이민지 실장",   services: ["signature", "babyperm", "scalp"] },
-    hyunwoo: { label: "정현우 (디자이너·6년차)", short: "정현우 디자이너", services: ["signature", "downperm", "ash", "scalp"] },
-    suyoung: { label: "유서영 (실장·9년차)",   short: "유서영 실장",   services: ["signature", "layered", "balayage", "scalp"] },
-    taeri:   { label: "한태리 (디자이너·5년차)", short: "한태리 디자이너", services: ["balayage", "babyperm", "ombre", "scalp"] },
-    seoyoon: { label: "최서윤 (디자이너·4년차)", short: "최서윤 디자이너", services: ["babyperm", "ash", "scalp"] },
-    junho:   { label: "강준호 (디자이너·5년차)", short: "강준호 디자이너", services: ["mens", "dandy", "downperm"] },
-  };
+  const DESIGNERS = {};
+  (window.DesignerStore ? DesignerStore.list() : []).forEach((d) => {
+    DESIGNERS[d.id] = {
+      label: `${d.name} (${d.role}·${d.years}년차)`,
+      short: `${d.name} ${d.role}`,
+      services: d.services || [],
+      tone: d.tone,
+      photo: d.photo || null,
+      initial: d.initial,
+      name: d.name,
+      role: d.role,
+      years: d.years,
+    };
+  });
+
+  // Render the designer pick row from the store. The rest of the booking
+  // flow only cares about [data-pick][data-designer-id] markers.
+  (function renderDesignerPicks() {
+    const row = document.getElementById("designer-pick-row");
+    if (!row) return;
+    const escapeHtml = (s) => String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    row.innerHTML = Object.entries(DESIGNERS).map(([id, d]) => {
+      const photoStyle = d.photo
+        ? ` style="background-image:url('${escapeHtml(d.photo)}'); background-size:cover; background-position:center;"`
+        : "";
+      const initial = d.photo ? "" : `<span class="designer-card__initial">${escapeHtml(d.initial)}</span>`;
+      return `
+        <div class="pick-card" data-pick data-pick-group="designer" data-designer-id="${escapeHtml(id)}" data-label="${escapeHtml(d.label)}">
+          <div class="pick-card__photo" data-tone="${escapeHtml(d.tone)}"${photoStyle}>${initial}</div>
+          <h4>${escapeHtml(d.name)}</h4>
+          <p>${escapeHtml(d.role)} · ${escapeHtml(d.years)}년차</p>
+        </div>`;
+    }).join("");
+  })();
 
   const EMPTY = "—";
   const state = {
@@ -167,9 +192,12 @@
       .map((sid) => {
         const s = SERVICES[sid];
         if (!s) return "";
+        const photoStyle = s.photo
+          ? ` style="background-image:url('${s.photo}'); background-size:cover; background-position:center;"`
+          : "";
         return `
           <div class="service-row" data-pick data-pick-group="service" data-service-id="${sid}" data-label="${s.label}" data-price="${s.price}">
-            <div class="service-row__photo" data-tone="${s.tone}"></div>
+            <div class="service-row__photo" data-tone="${s.tone}"${photoStyle}></div>
             <div class="service-row__main">
               <div class="service-row__title">
                 <span>${s.label}</span>
